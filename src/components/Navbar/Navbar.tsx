@@ -86,7 +86,9 @@ export default function Navbar({
       <Button key="budget" href="#" variant="contained" sx={{ color: '#fff' }}>
         Orçamento
       </Button>
-      <FormGroup sx={{ display: 'flex', justifyContent: 'center' }}>
+      <FormGroup
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      >
         <FormControlLabel
           className="mode-switch"
           sx={{
@@ -115,7 +117,12 @@ export default function Navbar({
         <Toolbar
           sx={{
             backgroundColor: 'transparent',
-            padding: '0 100px !important',
+            padding: {
+              xs: '0 20px',
+              md: '0 40px',
+              lg: '0 120px',
+              xl: '0 400px',
+            },
           }}
         >
           <IconButton color="primary" href="#">

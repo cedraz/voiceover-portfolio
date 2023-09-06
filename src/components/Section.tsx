@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import Image from 'next/image';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import { StaticImageData } from 'next/image';
@@ -29,56 +29,72 @@ export default function Section({
           xs: 'fit-content',
           md: '100vh',
         },
+        paddingBottom: {
+          xs: '50px',
+        },
         backgroundColor: order ? `${theme.hero.bgcolor}` : 'background.default',
       }}
     >
-      <Container
+      <Box
         sx={{
+          display: 'flex',
+          flexDirection: {
+            xs: 'column',
+            md: order ? 'row' : 'row-reverse',
+          },
           marginTop: {
             xs: '100px',
-            md: '180px',
+          },
+          width: {
+            xs: '100%',
+          },
+          padding: {
+            xs: '0 20px',
+            md: '0 40px',
+            lg: '0 120px',
+            xl: '0 400px',
           },
         }}
       >
         <Grid
-          container
-          spacing={5}
           sx={{
-            flexDirection: {
-              md: order ? 'row' : 'row-reverse',
+            width: {
+              xs: '100%',
+            },
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: {
+              xs: 'center',
+              md: 'center',
             },
             alignItems: {
               xs: 'center',
+              md: 'flex-start',
+            },
+            marginBottom: {
+              xs: '40px',
             },
           }}
         >
-          <Grid
-            container
-            item
-            xs={6}
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-            }}
-          >
-            {children}
-          </Grid>
-          <Grid
-            item
-            className="image-container"
-            xs={6}
-            sx={{
-              display: 'flex',
-              justifyContent: order ? 'flex-end' : 'flex-start',
-              alignItems: 'center',
-            }}
-          >
-            <Image className="image" src={image} alt="teste" />
-          </Grid>
+          {children}
         </Grid>
-      </Container>
+        <Grid
+          className="image-container"
+          sx={{
+            display: 'flex',
+            justifyContent: {
+              xs: 'center',
+              md: order ? 'flex-end' : 'flex-start',
+            },
+            alignItems: 'center',
+            width: {
+              xs: '100%',
+            },
+          }}
+        >
+          <Image className="image" src={image} alt="teste" />
+        </Grid>
+      </Box>
     </Grid>
   );
 }

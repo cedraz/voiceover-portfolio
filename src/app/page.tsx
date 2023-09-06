@@ -7,13 +7,13 @@ import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 import { lightTheme } from '../components/ThemeRegistry/lightTheme';
 import { darkTheme } from '../components/ThemeRegistry/darkTheme';
 
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
+import Navbar from '../components/Navbar/Navbar';
+import Hero from '../components/Hero/Hero';
 import Section from '../components/Section';
-import Categories from '../components/Categories';
-import Quality from '../components/Quality';
-import Services from '../components/Services';
-import Feedbacks from '@/components/Feedbacks';
+import Categories from '../components/Categories/Categories';
+import Quality from '../components/Quality/Quality';
+import Services from '../components/Services/Services';
+import Feedbacks from '@/components/Feedbacks/Feedbacks';
 
 import heroImage from '../../public/images/hero.png';
 import categoriesImage from '../../public/images/categories.png';

@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import StarIcon from '@mui/icons-material/Star';
-import '../styles/parallax.css';
+import '../../styles/parallax.css';
 
 export default function Feedbacks() {
   const theme = useTheme();

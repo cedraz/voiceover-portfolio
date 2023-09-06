@@ -3,3 +3,7 @@
   width: 100%;
   height: auto;
 }
+
+#Categorias img {
+  max-width: 472px;
+}

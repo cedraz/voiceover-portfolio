@@ -26,9 +26,26 @@ export default function Categories() {
   ];
 
   return (
-    <div className="background">
-      <Typography variant="h4">Categorias de locução</Typography>
-      <Typography variant="subtitle1" color={'text.secondary'}>
+    <>
+      <Typography
+        variant="h4"
+        sx={{
+          textAlign: {
+            xs: 'center',
+          },
+        }}
+      >
+        Categorias de locução
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          textAlign: {
+            xs: 'center',
+          },
+        }}
+        color={'text.secondary'}
+      >
         Abaixo estão as categorias de locuções que eu produzo
       </Typography>
       <List>
@@ -45,6 +62,6 @@ export default function Categories() {
           </ListItem>
         ))}
       </List>
-    </div>
+    </>
   );
 }

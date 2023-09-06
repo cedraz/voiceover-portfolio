@@ -53,10 +53,10 @@ export const lightTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 600,
-      md: 1070,
-      lg: 1200,
-      xl: 1400,
+      sm: 768,
+      md: 1024,
+      lg: 1440,
+      xl: 2560,
     },
   },
   typography: {

@@ -1,12 +1,28 @@
 'use client';
 import * as React from 'react';
 import { Typography, Grid, Card, CardContent, Box } from '@mui/material';
-import MusicPlayerSlider from './Services/MusicPlayerSlider';
+import MusicPlayerSlider from './MusicPlayerSlider';
 
 const SERVICES = [
   {
     name: 'VSL B-TRADER',
     audioSrc: '/audio/audio.mp3',
+  },
+  {
+    name: 'TESTE',
+    audioSrc: '/audio/audio2.mp3',
+  },
+  {
+    name: 'TESTE',
+    audioSrc: '/audio/audio2.mp3',
+  },
+  {
+    name: 'TESTE',
+    audioSrc: '/audio/audio2.mp3',
+  },
+  {
+    name: 'TESTE',
+    audioSrc: '/audio/audio2.mp3',
   },
   {
     name: 'TESTE',
