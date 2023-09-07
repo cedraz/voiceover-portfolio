@@ -5,27 +5,25 @@ declare module '@mui/material/styles' {
     navbar: {
       first: string;
     };
-    values: {
-      xs: number;
-      sm: number;
-      tt: number;
-      md: number;
-      lg: number;
-      xl: number;
+    hero: {
+      bgcolor: string;
     };
   }
   interface ThemeOptions {
     navbar?: {
       first?: string;
     };
-    values?: {
-      xs?: number;
-      sm?: number;
-      tt?: number;
-      md?: number;
-      lg?: number;
-      xl?: number;
+    hero?: {
+      bgcolor?: string;
     };
+  }
+  interface BreakpointOverrides {
+    xs: true;
+    mm: true;
+    sm: true;
+    md: true;
+    lg: true;
+    xl: true;
   }
 }
 
@@ -53,10 +51,11 @@ export const lightTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
+      mm: 400,
       sm: 768,
       md: 1024,
-      lg: 1440,
-      xl: 2560,
+      lg: 1250,
+      xl: 1440,
     },
   },
   typography: {

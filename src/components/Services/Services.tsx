@@ -9,23 +9,23 @@ const SERVICES = [
     audioSrc: '/audio/audio.mp3',
   },
   {
-    name: 'TESTE',
+    name: '1',
     audioSrc: '/audio/audio2.mp3',
   },
   {
-    name: 'TESTE',
+    name: '2',
     audioSrc: '/audio/audio2.mp3',
   },
   {
-    name: 'TESTE',
+    name: '3',
     audioSrc: '/audio/audio2.mp3',
   },
   {
-    name: 'TESTE',
+    name: '4',
     audioSrc: '/audio/audio2.mp3',
   },
   {
-    name: 'TESTE',
+    name: '5',
     audioSrc: '/audio/audio2.mp3',
   },
 ];
@@ -39,10 +39,31 @@ export default function Services() {
       >
         Conheça a minha voz
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
         {SERVICES.map(({ name, audioSrc }) => (
-          <Grid key={name} item xs={6}>
-            <Card>
+          <Grid
+            key={name}
+            item
+            xs={6}
+            sx={{
+              minWidth: {
+                xs: '100%',
+                mm: 'fit-content',
+              },
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <Card
+              sx={{
+                width: {
+                  xs: '100%',
+                },
+                maxWidth: {
+                  xs: '350px',
+                },
+              }}
+            >
               <CardContent sx={{ paddingBottom: '16px !important' }}>
                 <MusicPlayerSlider audioSrc={audioSrc}></MusicPlayerSlider>
               </CardContent>

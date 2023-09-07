@@ -19,7 +19,11 @@ export default function Hero() {
             md: 'left',
           },
           paddingRight: {
+            xs: '0',
+            sm: '0',
+            md: '0px',
             lg: '100px',
+            xl: '120px',
           },
         }}
       >
@@ -38,8 +42,11 @@ export default function Hero() {
             md: 'left',
           },
           paddingRight: {
-            md: '70px',
+            xs: '0',
+            sm: '0',
+            md: '0px',
             lg: '100px',
+            xl: '120px',
           },
         }}
       >

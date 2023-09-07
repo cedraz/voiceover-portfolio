@@ -4,6 +4,52 @@
   height: auto;
 }
 
-#Categorias img {
-  max-width: 472px;
+@media (max-width: 2560px) {
+  #Inicio img {
+    width: 600px;
+  }
+
+  #Serviços img {
+    max-width: 550px;
+  }
+}
+
+@media (max-width: 1440px) {
+  #Inicio img {
+    max-width: 500px;
+  }
+
+  #Serviços img {
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #Inicio img {
+    max-width: 100%;
+  }
+
+  #Categorias img {
+    max-width: 700px;
+  }
+
+  #Serviços img {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  #Inicio img {
+    max-width: 100%;
+  }
+
+  #Serviços img {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 500px) {
+}
+
+@media (max-width: 320px) {
 }

@@ -48,7 +48,7 @@ export default function Navbar({
     }
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 1200) {
+      if (window.innerWidth >= 1250) {
         setSize(false);
         if (open) {
           setOpen(false);
@@ -109,19 +109,19 @@ export default function Navbar({
         position="fixed"
         sx={{
           zIndex: 2000,
-          backgroundColor: theme.navbar.first,
           transition: '.3s ease-in-out',
           boxShadow: boxShadow,
         }}
       >
         <Toolbar
           sx={{
-            backgroundColor: 'transparent',
+            backgroundColor: theme.navbar.first,
             padding: {
               xs: '0 20px',
-              md: '0 40px',
+              sm: '0 40px',
+              md: '0 100px',
               lg: '0 120px',
-              xl: '0 400px',
+              xl: '0 220px',
             },
           }}
         >

@@ -2,22 +2,28 @@ import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface Theme {
+    navbar: {
+      first: string;
+    };
     hero: {
       bgcolor: string;
     };
-    navbar: {
-      first: string;
-      second: string;
-    };
   }
   interface ThemeOptions {
+    navbar?: {
+      first?: string;
+    };
     hero?: {
       bgcolor?: string;
     };
-    navbar?: {
-      first?: string;
-      second?: string;
-    };
+  }
+  interface BreakpointOverrides {
+    xs: true;
+    mm: true;
+    sm: true;
+    md: true;
+    lg: true;
+    xl: true;
   }
 }
 
@@ -40,7 +46,17 @@ export const darkTheme = createTheme({
     bgcolor: '#272727',
   },
   navbar: {
-    // first: '#2E3142',
+    first: '#2e2e2e',
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      mm: 400,
+      sm: 768,
+      md: 1024,
+      lg: 1250,
+      xl: 1440,
+    },
   },
   typography: {
     fontFamily: 'Poppins',

@@ -11,7 +11,14 @@ export default function Quality() {
       </Typography>
       <Typography
         variant="body1"
-        sx={{ marginBottom: '50px', color: 'text.secondary' }}
+        sx={{
+          marginBottom: '50px',
+          color: 'text.secondary',
+          textAlign: {
+            xs: 'justify',
+            md: 'left',
+          },
+        }}
       >
         Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
         accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab

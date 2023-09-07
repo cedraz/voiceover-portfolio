@@ -50,9 +50,10 @@ export default function Section({
           },
           padding: {
             xs: '0 20px',
-            md: '0 40px',
+            sm: '0 40px',
+            md: '0 100px',
             lg: '0 120px',
-            xl: '0 400px',
+            xl: '0 220px',
           },
         }}
       >

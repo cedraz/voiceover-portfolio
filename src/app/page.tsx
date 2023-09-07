@@ -20,6 +20,13 @@ import categoriesImage from '../../public/images/categories.png';
 import qualityImage from '../../public/images/quality.png';
 import servicesImage from '../../public/images/services.png';
 
+import { register } from 'swiper/element/bundle';
+register();
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-coverflow';
+
 export default function Home() {
   const [mode, setMode] = React.useState(true);
   const toggleTheme = () => {

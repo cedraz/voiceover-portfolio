@@ -32,6 +32,7 @@ export default function Categories() {
         sx={{
           textAlign: {
             xs: 'center',
+            md: 'left',
           },
         }}
       >
@@ -42,6 +43,7 @@ export default function Categories() {
         sx={{
           textAlign: {
             xs: 'center',
+            md: 'left',
           },
         }}
         color={'text.secondary'}
