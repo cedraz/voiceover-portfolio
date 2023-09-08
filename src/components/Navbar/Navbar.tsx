@@ -83,7 +83,19 @@ export default function Navbar({
           {id}
         </Button>
       ))}
-      <Button key="budget" href="#" variant="contained" sx={{ color: '#fff' }}>
+      <Button
+        key={'Feedback'}
+        href={'#Feedbacks'}
+        sx={{ color: 'text.primary', fontWeight: 400 }}
+      >
+        Feedbacks
+      </Button>
+      <Button
+        key="budget"
+        href="#Orçamento"
+        variant="contained"
+        sx={{ color: '#fff' }}
+      >
         Orçamento
       </Button>
       <FormGroup
@@ -111,11 +123,11 @@ export default function Navbar({
           zIndex: 2000,
           transition: '.3s ease-in-out',
           boxShadow: boxShadow,
+          backgroundColor: theme.navbar.first,
         }}
       >
         <Toolbar
           sx={{
-            backgroundColor: theme.navbar.first,
             padding: {
               xs: '0 20px',
               sm: '0 40px',

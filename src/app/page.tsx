@@ -14,6 +14,7 @@ import Categories from '../components/Categories/Categories';
 import Quality from '../components/Quality/Quality';
 import Services from '../components/Services/Services';
 import Feedbacks from '@/components/Feedbacks/Feedbacks';
+import Budget from '@/components/Budget/Budget';
 
 import heroImage from '../../public/images/hero.png';
 import categoriesImage from '../../public/images/categories.png';
@@ -48,6 +49,7 @@ export default function Home() {
       children: <Hero />,
       image: heroImage,
       order: true,
+      color: 'background.secondary',
     },
     {
       id: 'Categorias',
@@ -55,6 +57,7 @@ export default function Home() {
       children: <Categories />,
       image: categoriesImage,
       order: false,
+      color: 'background.default',
     },
     {
       id: 'Serviços',
@@ -62,6 +65,7 @@ export default function Home() {
       children: <Services />,
       image: servicesImage,
       order: true,
+      color: 'background.secondary',
     },
     {
       id: 'Qualidade',
@@ -69,6 +73,7 @@ export default function Home() {
       children: <Quality />,
       image: qualityImage,
       order: true,
+      color: 'background.default',
     },
   ];
 
@@ -77,13 +82,14 @@ export default function Home() {
       <ThemeRegistry theme={getMode(mode)}>
         <Navbar toggleFunc={toggleTheme} links={SECTIONS} />
 
-        {SECTIONS.map(({ image, order, children, id }) => (
-          <Section key={id} image={image} order={order} id={id}>
+        {SECTIONS.map(({ image, order, children, id, color }) => (
+          <Section key={id} image={image} order={order} id={id} color={color}>
             {children}
           </Section>
         ))}
 
         <Feedbacks />
+        <Budget />
       </ThemeRegistry>
     </>
   );

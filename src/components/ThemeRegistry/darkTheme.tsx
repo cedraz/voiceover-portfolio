@@ -25,6 +25,9 @@ declare module '@mui/material/styles' {
     lg: true;
     xl: true;
   }
+  interface TypeBackground {
+    secondary: string;
+  }
 }
 
 export const darkTheme = createTheme({
@@ -35,15 +38,15 @@ export const darkTheme = createTheme({
       dark: '#2D3B80',
     },
     background: {
-      default: '#242424',
+      default: '#272727',
+      paper: '#121212',
+      // secondary: '#242424',
+      secondary: '#2e2e2e',
     },
     text: {
       primary: '#fff',
       secondary: '#B5B5B5',
     },
-  },
-  hero: {
-    bgcolor: '#272727',
   },
   navbar: {
     first: '#2e2e2e',

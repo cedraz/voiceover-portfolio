@@ -25,6 +25,9 @@ declare module '@mui/material/styles' {
     lg: true;
     xl: true;
   }
+  interface TypeBackground {
+    secondary: string;
+  }
 }
 
 export const lightTheme = createTheme({
@@ -36,14 +39,13 @@ export const lightTheme = createTheme({
     },
     background: {
       default: '#fff',
+      paper: '#FAFAFA',
+      secondary: '#F6F8FF',
     },
     text: {
       primary: '#000000',
       secondary: '#343434',
     },
-  },
-  hero: {
-    bgcolor: '#F6F8FF',
   },
   navbar: {
     first: '#F6F8FF',
@@ -95,6 +97,13 @@ export const lightTheme = createTheme({
         },
         label: {
           fontSize: 16,
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          width: '100%',
         },
       },
     },

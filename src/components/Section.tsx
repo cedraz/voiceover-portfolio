@@ -11,11 +11,13 @@ export default function Section({
   order,
   children,
   id,
+  color,
 }: {
   image: StaticImageData;
   order: boolean;
   children: React.ReactNode;
   id: string;
+  color: string;
 }) {
   const theme = useTheme();
 
@@ -32,7 +34,7 @@ export default function Section({
         paddingBottom: {
           xs: '50px',
         },
-        backgroundColor: order ? `${theme.hero.bgcolor}` : 'background.default',
+        backgroundColor: color,
       }}
     >
       <Box
