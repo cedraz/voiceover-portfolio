@@ -1,15 +1,43 @@
 'use client';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
+import { set } from 'react-hook-form';
 
-export default function PhoneInput() {
-  const [phone, setPhone] = React.useState('');
-  const phoneInputRef = React.useRef<HTMLInputElement | null>(null);
-  const handlePhoneBlur = () => {
-    if (phoneInputRef.current) {
-      setPhone(phoneInputRef.current.value);
-      console.log(/^\d{2} \d{5}-\d{4}$/.test(phone));
-    }
+interface PhoneNumberInputProps {
+  phone: string;
+  setPhone: React.Dispatch<React.SetStateAction<string>>;
+  error: boolean;
+  values: {
+    name: boolean;
+    phone: boolean;
+    email: boolean;
+    category: boolean;
+    niche: boolean;
+    text: boolean;
+    chars: boolean;
+  };
+  setValues: React.Dispatch<
+    React.SetStateAction<{
+      name: boolean;
+      phone: boolean;
+      email: boolean;
+      category: boolean;
+      niche: boolean;
+      text: boolean;
+      chars: boolean;
+    }>
+  >;
+}
+
+export default function PhoneInput({
+  phone,
+  setPhone,
+  error,
+  values,
+  setValues,
+}: PhoneNumberInputProps) {
+  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhone(e.target.value.replace(/[^\d-]/g, ''));
   };
 
   return (
@@ -17,18 +45,19 @@ export default function PhoneInput() {
       label="Digite seu número de telefone"
       variant="outlined"
       required
-      onBlur={handlePhoneBlur}
+      error={error}
+      type="tel"
+      value={phone}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        setValues({ ...values, phone: false });
+        handlePhoneInput(e);
+      }}
       sx={{ mb: '20px' }}
-      inputProps={{ ref: phoneInputRef }}
-      color={
-        !/^(?:\d{11}|\d{2} \d{9})$/.test(phone) || phone === ''
-          ? 'error'
-          : 'success'
-      }
+      color={/^\d{11}$/.test(phone) ? 'success' : 'error'}
       helperText={
-        !/^(?:\d{11}|\d{2} \d{9})$/.test(phone) || phone === ''
-          ? 'Digite um número de telefone no formato: 99 99999-9999'
-          : ''
+        /^\d{11}$/.test(phone)
+          ? ''
+          : 'Digite um número de telefone no formato: 71988888888'
       }
     />
   );

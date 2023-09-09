@@ -40,7 +40,6 @@ export const darkTheme = createTheme({
     background: {
       default: '#272727',
       paper: '#121212',
-      // secondary: '#242424',
       secondary: '#2e2e2e',
     },
     text: {
@@ -95,6 +94,13 @@ export const darkTheme = createTheme({
         },
         label: {
           fontSize: 16,
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          width: '100%',
         },
       },
     },
