@@ -8,6 +8,14 @@ declare module '@mui/material/styles' {
     hero: {
       bgcolor: string;
     };
+    footer: {
+      bgcolor: string;
+      color: {
+        primary: string;
+        secondary: string;
+      };
+      divider: string;
+    };
   }
   interface ThemeOptions {
     navbar?: {
@@ -15,6 +23,14 @@ declare module '@mui/material/styles' {
     };
     hero?: {
       bgcolor?: string;
+    };
+    footer?: {
+      bgcolor?: string;
+      color?: {
+        primary?: string;
+        secondary?: string;
+      };
+      divider?: string;
     };
   }
   interface BreakpointOverrides {
@@ -27,6 +43,11 @@ declare module '@mui/material/styles' {
   }
   interface TypeBackground {
     secondary: string;
+    footer: string;
+  }
+  interface TypeText {
+    footer: string;
+    footerLink: string;
   }
 }
 
@@ -39,7 +60,7 @@ export const lightTheme = createTheme({
     },
     background: {
       default: '#fff',
-      paper: '#E0E0E0',
+      paper: '#e6e6e6',
       secondary: '#F6F8FF',
     },
     text: {
@@ -49,6 +70,14 @@ export const lightTheme = createTheme({
   },
   navbar: {
     first: '#F6F8FF',
+  },
+  footer: {
+    bgcolor: '#000',
+    color: {
+      primary: '#fff',
+      secondary: '#9F9F9F',
+    },
+    divider: '#fff',
   },
   breakpoints: {
     values: {

@@ -8,6 +8,14 @@ declare module '@mui/material/styles' {
     hero: {
       bgcolor: string;
     };
+    footer: {
+      bgcolor: string;
+      color: {
+        primary: string;
+        secondary: string;
+      };
+      divider: string;
+    };
   }
   interface ThemeOptions {
     navbar?: {
@@ -15,6 +23,14 @@ declare module '@mui/material/styles' {
     };
     hero?: {
       bgcolor?: string;
+    };
+    footer?: {
+      bgcolor?: string;
+      color?: {
+        primary?: string;
+        secondary?: string;
+      };
+      divider?: string;
     };
   }
   interface BreakpointOverrides {

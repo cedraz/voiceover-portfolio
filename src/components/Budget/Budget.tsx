@@ -15,7 +15,6 @@ import {
   MenuItem,
   Button,
 } from '@mui/material';
-import { Theme } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 
 import NameInput from './name-input';
@@ -68,23 +67,23 @@ export default function Section() {
 
   const validateEmail = async (email: string) => {
     const api_key = process.env.NEXT_PUBLIC_API_KEY;
-    const response = await axios({
+    const { data } = await axios({
       method: 'get',
-      url: `https://api.zerobounce.net/v2/validate?api_key=${api_key}&email=${email}&ip_address=`,
+      url: `https://emailvalidation.abstractapi.com/v1/?api_key=${api_key}&email=${email}`,
     });
-    return response;
+    return data;
   };
 
   const sendMessageByEmail = async () => {
-    const { data } = await validateEmail(email);
-    const isEmailValid = data.status === 'valid';
-    if (isEmailValid) {
+    const { deliverability } = await validateEmail(email);
+
+    if (deliverability === 'DELIVERABLE') {
       const message = `
       Olá, meu nome é ${name} e desejo pedir um orçamento para minha locução
       Eu estou precisando de uma locução do tipo: ${category}
       O nicho da locução é: ${niche}
       O número de palavras é: ${chars}
-      O meio de divulgação da narração é: ${channel} 
+      O meio de divulgação da narração é: ${channel}
     `;
       const templateParams = {
         from_name: name,
@@ -92,7 +91,6 @@ export default function Section() {
         email: email,
       };
       if (
-        isEmailValid &&
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
       ) {
@@ -103,7 +101,13 @@ export default function Section() {
           process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
         );
       }
+      setOpen(true);
+      setSuccess(true);
+      setMessage('Orçamento enviado com sucesso pelo email!');
     } else {
+      setOpen(true);
+      setSuccess(false);
+      setMessage('Digite um email válido');
       return;
     }
   };
@@ -118,7 +122,7 @@ export default function Section() {
     `;
 
     setLink(
-      `https://api.whatsapp.com/send?phone=5571999440042&text=${encodeURIComponent(
+      `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
         message
       )}`
     );
@@ -160,9 +164,6 @@ export default function Section() {
     }
 
     if (checked[1]) {
-      setOpen(true);
-      setSuccess(true);
-      setMessage('Orçamento enviado com sucesso pelo email!');
       await sendMessageByEmail();
     }
 
@@ -178,11 +179,6 @@ export default function Section() {
   const style = {
     pl: '0 !important',
   };
-  const textFieldStyle = (theme: Theme) => ({
-    [theme.breakpoints.up('xs')]: {
-      textAlign: 'center !important',
-    },
-  });
 
   return (
     <Grid
@@ -192,7 +188,6 @@ export default function Section() {
       sx={{
         height: {
           xs: 'fit-content',
-          md: 'fit-content',
         },
         paddingBottom: {
           xs: '50px',
@@ -276,6 +271,7 @@ export default function Section() {
                 xs: 'center',
                 sm: 'left',
               },
+              border: `1px solid ${theme.palette.text.primary}`,
             }}
           >
             {/* Nome */}
