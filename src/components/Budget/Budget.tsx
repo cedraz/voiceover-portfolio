@@ -1,19 +1,30 @@
 'use client';
 import * as React from 'react';
-import { set, useForm } from 'react-hook-form';
+import axios from 'axios';
+import emailjs from '@emailjs/browser';
 import {
   Grid,
   Box,
   TextField,
   Typography,
   FormGroup,
+  FormControl,
   FormControlLabel,
+  FormLabel,
   Checkbox,
   MenuItem,
   Button,
 } from '@mui/material';
+import { Theme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
-import PhoneInput from './PhoneInput';
+import NameInput from './name-input';
+import PhoneInput from './phone-input';
+import EmailInput from './email-input';
+import CategorySelect from './category-select';
+import ChannelInput from './channel-input';
+import FormSnackbar from './form-snackbar';
+import WhatsappModal from './whatsapp-modal';
 
 export default function Section() {
   const [checked, setChecked] = React.useState([false, false]);
@@ -31,41 +42,147 @@ export default function Section() {
   const [niche, setNiche] = React.useState('');
   const [text, setText] = React.useState('');
   const [chars, setChars] = React.useState(0);
-
+  const [channel, setChannel] = React.useState('');
   const [values, setValues] = React.useState({
     name: false,
+    preference: false,
     phone: false,
     email: false,
     category: false,
     niche: false,
-    text: false,
     chars: false,
+    channel: false,
   });
+  const [open, setOpen] = React.useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
+  const [link, setLink] = React.useState('');
+  const [success, setSuccess] = React.useState(false);
+  const [message, setMessage] = React.useState('');
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const countWords = () => {
+    const trimmedText: string = text.trim();
+    const words: string[] = trimmedText.split(/\s+/);
+    const filteredWords: string[] = words.filter((word) => word !== '');
+    setChars(filteredWords.length);
+  };
+
+  const validateEmail = async (email: string) => {
+    const api_key = process.env.NEXT_PUBLIC_API_KEY;
+    const response = await axios({
+      method: 'get',
+      url: `https://api.zerobounce.net/v2/validate?api_key=${api_key}&email=${email}&ip_address=`,
+    });
+    return response;
+  };
+
+  const sendMessageByEmail = async () => {
+    const { data } = await validateEmail(email);
+    const isEmailValid = data.status === 'valid';
+    if (isEmailValid) {
+      const message = `
+      Olá, meu nome é ${name} e desejo pedir um orçamento para minha locução
+      Eu estou precisando de uma locução do tipo: ${category}
+      O nicho da locução é: ${niche}
+      O número de palavras é: ${chars}
+      O meio de divulgação da narração é: ${channel} 
+    `;
+      const templateParams = {
+        from_name: name,
+        message: message,
+        email: email,
+      };
+      if (
+        isEmailValid &&
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+      ) {
+        emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+          templateParams,
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+        );
+      }
+    } else {
+      return;
+    }
+  };
+
+  const sendMessageByWhatsapp = async () => {
+    const message = `
+    Olá, meu nome é ${name} e desejo pedir um orçamento para minha locução
+      Eu estou precisando de uma locução do tipo: ${category}
+      O nicho da locução é: ${niche}
+      O número de palavras é: ${chars}
+      O meio de divulgação da narração é: ${channel} 
+    `;
+
+    setLink(
+      `https://api.whatsapp.com/send?phone=5571999440042&text=${encodeURIComponent(
+        message
+      )}`
+    );
+
+    setOpenModal(true);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    let phonePreference: boolean = false;
-    let emailPreference: boolean = false;
-    if (checked[0]) {
-      phonePreference = true;
-    }
-    if (checked[1]) {
-      emailPreference = true;
-    }
+    const errors = [
+      !(name.length >= 5 && name.length <= 65),
+      !checked[0] && !checked[1],
+      checked[0] && phone.length !== 11,
+      checked[1] &&
+        !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email),
+      category === '',
+      niche === '',
+      chars === 0,
+      channel === '',
+    ];
 
     setValues({
-      name: !(name.length >= 5 && name.length <= 65),
-      phone: phonePreference && phone.length !== 11,
-      email:
-        emailPreference &&
-        !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email),
-      category: category === '',
-      niche: niche === '',
-      text: false,
-      chars: false,
+      name: errors[0],
+      preference: errors[1],
+      phone: errors[2],
+      email: errors[3],
+      category: errors[4],
+      niche: errors[5],
+      chars: errors[6],
+      channel: errors[7],
     });
+
+    if (errors.some((e) => e === true)) {
+      setOpen(true);
+      setSuccess(false);
+      setMessage('Preencha todos os campos corretamente');
+      return;
+    }
+
+    if (checked[1]) {
+      setOpen(true);
+      setSuccess(true);
+      setMessage('Orçamento enviado com sucesso pelo email!');
+      await sendMessageByEmail();
+    }
+
+    if (checked[0]) {
+      setOpen(true);
+      setSuccess(true);
+      setMessage('Link com mensagem pronta gerado com sucesso!');
+      await sendMessageByWhatsapp();
+    }
   };
+
+  const theme = useTheme();
+  const style = {
+    pl: '0 !important',
+  };
+  const textFieldStyle = (theme: Theme) => ({
+    [theme.breakpoints.up('xs')]: {
+      textAlign: 'center !important',
+    },
+  });
 
   return (
     <Grid
@@ -80,7 +197,13 @@ export default function Section() {
         paddingBottom: {
           xs: '50px',
         },
-        backgroundColor: 'background.default',
+        backgroundColor: theme.palette.background.default,
+        width: {
+          xs: '100%',
+        },
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Box
@@ -101,7 +224,7 @@ export default function Section() {
             xs: '100%',
           },
           padding: {
-            xs: '0 60px',
+            xs: '0 0',
           },
         }}
       >
@@ -110,13 +233,13 @@ export default function Section() {
           spacing={2}
           sx={{
             width: {
-              xs: '100%',
+              xs: '95%',
             },
             display: 'flex',
             flexDirection: 'row',
             justifyContent: {
               xs: 'center',
-              md: 'center',
+              md: 'flex-end',
             },
             alignItems: {
               xs: 'flex-end',
@@ -125,103 +248,115 @@ export default function Section() {
             marginBottom: {
               xs: '40px',
             },
+            ml: {
+              xs: '0',
+            },
           }}
         >
-          <Grid item xs={6}></Grid>
-          <Grid item xs={6} container spacing={2}>
+          <Grid item xs={0} md={6}></Grid>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            container
+            spacing={2}
+            sx={{
+              backgroundColor: theme.palette.background.paper,
+              p: {
+                xs: '32px 32px !important',
+              },
+              borderRadius: '10px',
+              width: {
+                xs: '100%',
+              },
+              marginLeft: {
+                xs: '0',
+              },
+              textAlign: {
+                xs: 'center',
+                sm: 'left',
+              },
+            }}
+          >
             {/* Nome */}
-            <Grid item xs={12}>
-              <Typography variant="body1" sx={{ mb: '5px' }}>
-                Qual o seu nome?
-              </Typography>
-              <TextField
-                label="Nome"
-                variant="outlined"
-                required
-                error={values.name}
-                value={name}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setValues({ ...values, name: false });
-                  setName(e.target.value);
-                }}
-                color={
-                  name.length >= 5 && name.length <= 65 ? 'success' : 'error'
-                }
-                helperText={
-                  name.length >= 5 && name.length <= 65
-                    ? ''
-                    : 'Seu nome tem que ter entre 4 a 65 caracteres'
-                }
+            <Grid item xs={12} sx={style}>
+              <NameInput
+                name={name}
+                setName={setName}
+                values={values}
+                setValues={setValues}
               />
             </Grid>
 
             {/* Checkbox de preferencia (email ou whatsapp) */}
-            <Grid item xs={12}>
-              <Typography variant="body1" sx={{ textAlign: 'left' }}>
+            <Grid item xs={12} sx={style}>
+              <Typography variant="body1">
                 Prefere que o contato seja via e-mail ou whatsapp?
               </Typography>
-              <FormGroup
-                sx={{ display: 'flex', flexDirection: 'row', mb: '10px' }}
+              <FormControl
+                component="fieldset"
+                error={values.preference}
+                sx={{
+                  width: {
+                    xs: '100%',
+                  },
+                }}
               >
-                <FormControlLabel
-                  sx={{ marginRight: '100px' }}
-                  control={<Checkbox onChange={handleCheckWhatsapp} />}
-                  label="Whatsapp"
-                />
-                <FormControlLabel
-                  control={<Checkbox onChange={handleCheckEmail} />}
-                  label="Email"
-                />
-              </FormGroup>
-              {checked[0] ? (
-                <TextField
-                  label="Digite seu número de telefone"
-                  variant="outlined"
-                  required
-                  error={values.phone}
-                  type="tel"
-                  value={phone}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setValues({ ...values, phone: false });
-                    setPhone(e.target.value.replace(/[^0-9]/g, ''));
+                <FormLabel
+                  component="legend"
+                  color={checked[0] || checked[1] ? 'success' : 'error'}
+                  sx={{ fontSize: '16px' }}
+                >
+                  Selecione pelo menos 1
+                </FormLabel>
+                <FormGroup
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: {
+                      xs: 'space-between',
+                      mm: 'flex-start',
+                    },
                   }}
-                  sx={{ mb: '20px' }}
-                  color={/^\d{11}$/.test(phone) ? 'success' : 'error'}
-                  helperText={
-                    /^\d{11}$/.test(phone)
-                      ? ''
-                      : 'Digite um número de telefone no formato: 71988888888'
-                  }
+                >
+                  <FormControlLabel
+                    sx={{
+                      marginRight: {
+                        mm: '100px',
+                      },
+                    }}
+                    control={
+                      <Checkbox
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          setValues({ ...values, preference: false });
+                          handleCheckWhatsapp(e);
+                        }}
+                      />
+                    }
+                    label="Whatsapp"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox onChange={handleCheckEmail} />}
+                    label="Email"
+                  />
+                </FormGroup>
+              </FormControl>
+              {checked[0] ? (
+                <PhoneInput
+                  phone={phone}
+                  setPhone={setPhone}
+                  values={values}
+                  setValues={setValues}
                 />
               ) : (
                 <></>
               )}
               {checked[1] ? (
-                <TextField
-                  label="Digite seu email"
-                  type="email"
-                  variant="outlined"
-                  required
-                  error={values.email}
-                  value={email}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setValues({ ...values, email: false });
-                    setEmail(e.target.value);
-                  }}
-                  color={
-                    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(
-                      email
-                    )
-                      ? 'success'
-                      : 'error'
-                  }
-                  helperText={
-                    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(
-                      email
-                    )
-                      ? ''
-                      : 'Digite um email válido: "exemplo@email.com"'
-                  }
+                <EmailInput
+                  email={email}
+                  setEmail={setEmail}
+                  values={values}
+                  setValues={setValues}
                 />
               ) : (
                 <></>
@@ -229,35 +364,17 @@ export default function Section() {
             </Grid>
 
             {/* Categoria de locução */}
-            <Grid item xs={12}>
-              <Typography variant="subtitle1" sx={{ mb: '5px' }}>
-                Qual tipo de locução você precisa?
-              </Typography>
-              <TextField
-                id="demo-simple-select"
-                label="Selecione"
-                select
-                required
-                error={values.category}
-                value={category}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setValues({ ...values, category: false });
-                  setCategory(e.target.value);
-                }}
-                SelectProps={{ MenuProps: { disableScrollLock: true } }}
-                color={category !== '' ? 'success' : 'error'}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Aatt</MenuItem>
-                <MenuItem value={30}>Bar</MenuItem>
-                <MenuItem value={40}>Ber</MenuItem>
-                <MenuItem value={50}>GHE</MenuItem>
-                <MenuItem value={60}>GDAg</MenuItem>
-              </TextField>
+            <Grid item xs={12} sx={style}>
+              <CategorySelect
+                category={category}
+                setCategory={setCategory}
+                values={values}
+                setValues={setValues}
+              />
             </Grid>
 
             {/* Nicho */}
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={style}>
               <Typography variant="subtitle1" sx={{ mb: '5px' }}>
                 Me fale um pouco sobre o assunto da locução, sobre o que se
                 trata o texto?
@@ -266,7 +383,6 @@ export default function Section() {
                 label="Qual o nicho da locução?"
                 variant="outlined"
                 multiline
-                required
                 error={values.niche}
                 value={niche}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -282,47 +398,68 @@ export default function Section() {
               ></TextField>
             </Grid>
 
-            {/* Texto da locução */}
-            <Grid item xs={12}>
+            {/* Subtitle */}
+            <Grid item xs={12} md={8} sx={style}>
               <Typography variant="subtitle1" sx={{ mb: '5px' }}>
                 Qual o número total de palavras para essa narração? *
               </Typography>
             </Grid>
 
-            {/* Caracteres */}
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '20px',
-              }}
-            >
+            {/* Texto da locução + caracteres */}
+            <Grid item xs={12} sm={9} sx={style}>
               <TextField
                 label="Digite um número ou envie o texto completo"
                 multiline
                 helperText={
                   'Caso não saiba, digite o texto e calcularemos os caracteres'
                 }
+                value={text}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setText(e.target.value);
+                  setValues({ ...values, chars: false });
+                }}
+                onBlur={countWords}
+                sx={{
+                  pr: {
+                    xs: '0',
+                    sm: '8px !important',
+                  },
+                }}
               ></TextField>
+            </Grid>
+
+            <Grid item xs={12} sm={3} sx={style}>
               <TextField
                 type={'number'}
                 label="Palavras"
                 helperText={'Número de palavras'}
-                sx={{ width: '35%' }}
+                sx={{
+                  width: {
+                    xs: '100%',
+                  },
+                }}
+                value={chars}
+                error={values.chars}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setValues({ ...values, chars: false });
+                  if (e.target.value === '') {
+                    setChars(0);
+                  } else {
+                    setChars(parseInt(e.target.value));
+                  }
+                }}
+                color={chars > 0 ? 'success' : 'error'}
               ></TextField>
             </Grid>
 
             {/* Meio de divulgação */}
-            <Grid item xs={12}>
-              <Typography variant="subtitle1" sx={{ mb: '5px' }}>
-                Onde esta narração será divulgada?
-              </Typography>
-              <TextField
-                label="Em que meio será divulgada?"
-                required
-              ></TextField>
+            <Grid item xs={12} sx={style}>
+              <ChannelInput
+                channel={channel}
+                setChannel={setChannel}
+                values={values}
+                setValues={setValues}
+              />
             </Grid>
 
             {/* Botão de submit */}
@@ -339,6 +476,7 @@ export default function Section() {
                   xs: 'flex-end',
                   md: 'flex-end',
                 },
+                p: '0',
               }}
             >
               <Button variant="contained" type="submit">
@@ -346,6 +484,17 @@ export default function Section() {
               </Button>
             </Grid>
           </Grid>
+          <FormSnackbar
+            open={open}
+            setOpen={setOpen}
+            message={message}
+            success={success}
+          />
+          <WhatsappModal
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            link={link}
+          />
         </Grid>
       </Box>
     </Grid>

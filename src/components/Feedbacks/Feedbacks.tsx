@@ -97,7 +97,7 @@ export default function Feedbacks() {
         container
         className="image-container"
         sx={{
-          height: '100vh',
+          height: 'fit-content',
           backgroundColor: 'background.secondary',
           width: '100%',
           margin: '0 auto',

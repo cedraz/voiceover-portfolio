@@ -1,30 +1,30 @@
 'use client';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import { set } from 'react-hook-form';
 
 interface PhoneNumberInputProps {
   phone: string;
   setPhone: React.Dispatch<React.SetStateAction<string>>;
-  error: boolean;
   values: {
     name: boolean;
+    preference: boolean;
     phone: boolean;
     email: boolean;
     category: boolean;
     niche: boolean;
-    text: boolean;
     chars: boolean;
+    channel: boolean;
   };
   setValues: React.Dispatch<
     React.SetStateAction<{
       name: boolean;
+      preference: boolean;
       phone: boolean;
       email: boolean;
       category: boolean;
       niche: boolean;
-      text: boolean;
       chars: boolean;
+      channel: boolean;
     }>
   >;
 }
@@ -32,27 +32,21 @@ interface PhoneNumberInputProps {
 export default function PhoneInput({
   phone,
   setPhone,
-  error,
   values,
   setValues,
 }: PhoneNumberInputProps) {
-  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhone(e.target.value.replace(/[^\d-]/g, ''));
-  };
-
   return (
     <TextField
       label="Digite seu número de telefone"
       variant="outlined"
-      required
-      error={error}
+      sx={{ mt: '10px' }}
       type="tel"
+      error={values.phone}
       value={phone}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, phone: false });
-        handlePhoneInput(e);
+        setPhone(e.target.value.replace(/[^0-9]/g, ''));
       }}
-      sx={{ mb: '20px' }}
       color={/^\d{11}$/.test(phone) ? 'success' : 'error'}
       helperText={
         /^\d{11}$/.test(phone)

@@ -39,7 +39,7 @@ export const lightTheme = createTheme({
     },
     background: {
       default: '#fff',
-      paper: '#FAFAFA',
+      paper: '#E0E0E0',
       secondary: '#F6F8FF',
     },
     text: {
