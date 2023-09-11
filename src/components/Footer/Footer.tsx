@@ -12,10 +12,34 @@ import {
 import MicIcon from '@mui/icons-material/Mic';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import { useTheme } from '@mui/material/styles';
 
 export default function Footer() {
   const theme = useTheme();
+
+  const links = [
+    {
+      id: 'Início',
+      href: '#Início',
+    },
+    {
+      id: 'Categorias',
+      href: '#Categorias',
+    },
+    {
+      id: 'Portfólio',
+      href: '#Portfólio',
+    },
+    {
+      id: 'Qualidade',
+      href: '#Qualidade',
+    },
+    {
+      id: 'Feedbacks',
+      href: '#Feedbacks',
+    },
+  ];
 
   return (
     <>
@@ -36,28 +60,33 @@ export default function Footer() {
           sx={{
             mb: '10px',
             alignItems: 'center',
-            justifyContent: 'space-around',
+            justifyContent: {
+              xs: 'center',
+              md: 'space-between',
+              lg: 'space-around',
+            },
           }}
         >
           <Grid
             item
             xs={12}
-            mm={6}
-            md={3}
+            sm={4}
             sx={{
               display: 'flex',
               alignItems: 'center',
+              justifyContent: {
+                xs: 'center',
+                sm: 'flex-start',
+              },
             }}
           >
-            <IconButton color="primary" href="#">
+            <IconButton color="primary" href="#Início" sx={{ p: '8px 0' }}>
               <MicIcon sx={{ fontSize: 36 }} />
             </IconButton>
             <Typography
-              variant="h6"
-              noWrap
-              component="div"
+              variant="subtitle1"
               color={theme.footer.color.primary}
-              sx={{ flexGrow: 1, cursor: 'pointer' }}
+              sx={{ cursor: 'pointer' }}
             >
               Geovana Alves
             </Typography>
@@ -65,35 +94,43 @@ export default function Footer() {
           <Grid
             item
             xs={12}
-            mm={6}
-            md={3}
+            sm={4}
             sx={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <Typography variant="subtitle2">
+            <Typography variant="subtitle2" sx={{ textAlign: 'center' }}>
               © 2022 - 2023 Geovana Alves
             </Typography>
           </Grid>
           <Grid
             item
             xs={12}
-            mm={6}
-            md={3}
+            sm={4}
             sx={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'flex-end',
+              justifyContent: {
+                xs: 'flex-start',
+                mm: 'center',
+                sm: 'flex-end',
+              },
             }}
           >
             <Stack
               direction="row"
               spacing={3}
-              sx={{ fontSize: '12px', mt: '10px' }}
+              sx={{ fontSize: '12px', mt: '10px', mb: '10px' }}
             >
-              <IconButton href={'#'}>
+              <IconButton
+                target="_blank"
+                href={
+                  'https://api.whatsapp.com/send?phone=5571988078997&text=Ol%C3%A1,%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20minha%20locu%C3%A7%C3%A3o.'
+                }
+                sx={{ p: '0' }}
+              >
                 <WhatsAppIcon
                   sx={{
                     fontSize: 25,
@@ -104,7 +141,13 @@ export default function Footer() {
                   }}
                 />
               </IconButton>
-              <IconButton href={'#'}>
+              <IconButton
+                target="_blank"
+                href={
+                  'mailto:geovana.alvesdeoli@gmail.com?subject=Pedido%20de%20orçamento%20para%20locução&body=Olá%2C%20gostaria%20de%20solicitar%20um%20orçamento%20para%20minha%20locução'
+                }
+                sx={{ p: '0' }}
+              >
                 <EmailIcon
                   sx={{
                     fontSize: 25,
@@ -118,58 +161,50 @@ export default function Footer() {
             </Stack>
           </Grid>
         </Grid>
-        <Box sx={{ mb: '15px', display: 'flex', justifyContent: 'center' }}>
-          <Stack direction="row" spacing={3} sx={{ fontSize: '12px' }}>
-            <Link
-              variant="body2"
-              target="_blank"
-              href="https://github.com/cedraz"
-              sx={{ color: theme.footer.color.secondary }}
-              underline="hover"
-            >
-              Início
-            </Link>
-            <Link
-              variant="body2"
-              target="_blank"
-              href="https://github.com/cedraz"
-              sx={{ color: theme.footer.color.secondary }}
-              underline="hover"
-            >
-              Categorias
-            </Link>
-            <Link
-              variant="body2"
-              target="_blank"
-              href="https://github.com/cedraz"
-              sx={{ color: theme.footer.color.secondary }}
-              underline="hover"
-            >
-              Serviços
-            </Link>
-            <Link
-              variant="body2"
-              target="_blank"
-              href="https://github.com/cedraz"
-              sx={{ color: theme.footer.color.secondary }}
-              underline="hover"
-            >
-              Qualidade
-            </Link>
-            <Link
-              variant="body2"
-              target="_blank"
-              href="https://github.com/cedraz"
-              sx={{ color: theme.footer.color.secondary }}
-              underline="hover"
-            >
-              Feedbacks
-            </Link>
+        <Box
+          sx={{
+            mb: '25px',
+            display: 'flex',
+            justifyContent: {
+              xs: 'flex-start',
+              mm: 'center',
+            },
+          }}
+        >
+          <Stack
+            sx={{
+              flexWrap: 'wrap',
+              flexDirection: {
+                xs: 'column',
+                mm: 'row',
+              },
+              gap: {
+                xs: '5px',
+                mm: '15px',
+              },
+            }}
+          >
+            {links.map(({ id, href }) => (
+              <Link
+                key={id}
+                variant="body2"
+                href={href}
+                sx={{ color: theme.footer.color.secondary }}
+                underline="hover"
+              >
+                {id}
+              </Link>
+            ))}
           </Stack>
         </Box>
         <Divider
           variant="middle"
-          sx={{ backgroundColor: theme.footer.divider }}
+          sx={{
+            backgroundColor: theme.footer.divider,
+            m: {
+              xs: '0 0',
+            },
+          }}
         />
 
         <Box sx={{ mt: '15px', display: 'flex', justifyContent: 'center' }}>
@@ -183,6 +218,9 @@ export default function Footer() {
               underline="hover"
             >
               cedraz
+              <IconButton sx={{ color: theme.footer.color.primary }}>
+                <GitHubIcon></GitHubIcon>
+              </IconButton>
             </Link>
           </Typography>
         </Box>

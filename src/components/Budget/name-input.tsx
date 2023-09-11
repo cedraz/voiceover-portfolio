@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { TextField, Typography, MenuItem } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 
 interface CategorySelectProps {
   name: string;
@@ -14,6 +14,7 @@ interface CategorySelectProps {
     niche: boolean;
     chars: boolean;
     channel: boolean;
+    anotherCategory: boolean;
   };
   setValues: React.Dispatch<
     React.SetStateAction<{
@@ -25,6 +26,7 @@ interface CategorySelectProps {
       niche: boolean;
       chars: boolean;
       channel: boolean;
+      anotherCategory: boolean;
     }>
   >;
 }

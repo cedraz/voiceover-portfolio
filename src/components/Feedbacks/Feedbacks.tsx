@@ -16,12 +16,8 @@ import '../../styles/parallax.css';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
-// import '../../styles/swiper.css';
-
 export default function Feedbacks() {
   const theme = useTheme();
-
   const [perView, setPerView] = React.useState(3);
 
   React.useEffect(() => {
@@ -46,47 +42,49 @@ export default function Feedbacks() {
 
   const FEEDBACKS = [
     {
-      name: 'Christopher 1',
-      feedback:
-        'citado. Gosts com ela, ssional, entreto mais do que o solicitado. Gostei demais do resultado, farei mais trabalhos com ela, com certeza!Excelente profissional, entrega muito mais do que o solicitado. Gostei demais do resultado, farei mais trabalhos com ela, com certeza!Excelente profissional, entrega muito mais do que o solicitado. Gostei demais do resultado, farei mais trabalhos com ela, com certeza!',
-      date: '23/01/2023',
+      name: 'Ricardo A.',
+      feedback: 'Tudo certinho, conforme combinado. Obrigado :-)',
+      date: '31/08/2023',
       stars: 5,
     },
     {
-      name: 'Christopher 2',
-      feedback: 'Excelente profissional, entrega demorada',
+      name: 'André A.',
+      feedback:
+        'Gostei bastante do trabalho dela, em breve irei contratar novamente!!',
+      date: '29/07/2023',
+      stars: 5,
+    },
+    {
+      name: 'maju biju bijuterias Eireli',
+      feedback: 'Ok excelente!',
+      date: '14/07/2023',
+      stars: 5,
+    },
+    {
+      name: 'Jefte J.',
+      feedback:
+        'Excelente profissional, entrega muito mais do que o solicitado. Gostei demais do resultado, farei mais trabalhos com ela, com certeza!',
+      date: '23/06/2023',
+      stars: 5,
+    },
+    {
+      name: 'Leandro d.',
+      feedback: 'Super recomendo! Muito top',
+      date: '19/02/2023',
+      stars: 5,
+    },
+    {
+      name: 'Antonio j.',
+      feedback:
+        'Entrega rápida e com qualidade excelente, Fez alterações que melhorou consideravelmente a fluidez do texto, excelente profissional!',
+      date: '01/02/2023',
+      stars: 5,
+    },
+    {
+      name: 'Igor C.',
+      feedback: 'Narração muito boa mesmo, sem palavras!',
       date: '23/01/2023',
-      stars: 2,
-    },
-    {
-      name: 'Christopher 3',
-      feedback: 'Excelente profissional, com certeza!',
-      date: '23/01/2024',
-      stars: 4,
-    },
-    {
-      name: 'Christopher 4',
-      feedback: 'Excelente profissional, com certeza!',
-      date: '23/01/2024',
-      stars: 4,
-    },
-    {
-      name: 'Christopher 5',
-      feedback: 'Excelente profissional, com certeza!',
-      date: '23/01/2024',
-      stars: 4,
-    },
-    {
-      name: 'Christopher 6',
-      feedback: 'Excelente profissional, com certeza!',
-      date: '23/01/2024',
-      stars: 4,
-    },
-    {
-      name: 'Christopher 7',
-      feedback: 'Excelente profissional, com certeza!',
-      date: '23/01/2024',
-      stars: 4,
+      stars: 5,
     },
   ];
 
@@ -125,6 +123,9 @@ export default function Feedbacks() {
           slidesPerView={perView}
           pagination={{ clickable: true }}
           navigation
+          style={{
+            cursor: 'grab',
+          }}
         >
           {FEEDBACKS.map(({ name, feedback, date, stars }) => (
             <SwiperSlide
@@ -144,9 +145,17 @@ export default function Feedbacks() {
                   borderRadius: '10px',
                   width: '90%',
                   maxWidth: '450px',
+                  height: '260px',
                 }}
               >
-                <CardContent sx={{ padding: '25px 25px !important' }}>
+                <CardContent
+                  sx={{
+                    padding: '25px 25px !important',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                  }}
+                >
                   <Typography variant="h5" sx={{ mb: '25px' }}>
                     {name}
                   </Typography>
@@ -161,7 +170,13 @@ export default function Feedbacks() {
                   >
                     {feedback}
                   </Typography>
-                  <CardActions sx={{ justifyContent: 'space-between' }}>
+                  <CardActions
+                    sx={{
+                      mt: 'auto',
+                      justifyContent: 'space-between',
+                      pl: '0 !important',
+                    }}
+                  >
                     <Grid
                       sx={{
                         padding: '0 !important',

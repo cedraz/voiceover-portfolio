@@ -43,6 +43,11 @@ declare module '@mui/material/styles' {
   }
   interface TypeBackground {
     secondary: string;
+    footer: string;
+  }
+  interface TypeText {
+    footer: string;
+    footerLink: string;
   }
 }
 
@@ -65,6 +70,14 @@ export const darkTheme = createTheme({
   },
   navbar: {
     first: '#2e2e2e',
+  },
+  footer: {
+    bgcolor: '#000',
+    color: {
+      primary: '#fff',
+      secondary: '#9F9F9F',
+    },
+    divider: '#fff',
   },
   breakpoints: {
     values: {

@@ -17,13 +17,15 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
+// import PhoneInput from './phone-input';
 import NameInput from './name-input';
-import PhoneInput from './phone-input';
 import EmailInput from './email-input';
 import CategorySelect from './category-select';
+import AnotherInput from './another-input';
 import ChannelInput from './channel-input';
 import FormSnackbar from './form-snackbar';
 import WhatsappModal from './whatsapp-modal';
+import NicheInput from './niche-input';
 
 export default function Section() {
   const [checked, setChecked] = React.useState([false, false]);
@@ -42,6 +44,7 @@ export default function Section() {
   const [text, setText] = React.useState('');
   const [chars, setChars] = React.useState(0);
   const [channel, setChannel] = React.useState('');
+  const [anotherCategory, setAnotherCategory] = React.useState('');
   const [values, setValues] = React.useState({
     name: false,
     preference: false,
@@ -51,6 +54,7 @@ export default function Section() {
     niche: false,
     chars: false,
     channel: false,
+    anotherCategory: false,
   });
   const [open, setOpen] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
@@ -74,60 +78,113 @@ export default function Section() {
     return data;
   };
 
-  const sendMessageByEmail = async () => {
-    const { deliverability } = await validateEmail(email);
+  const emailTemplate = (name: string, email: string) => {
+    let message = '';
+    if (category === 'Outra') {
+      message = `Olá, meu nome é ${name} e desejo pedir um orçamento para minha locução
 
-    if (deliverability === 'DELIVERABLE') {
-      const message = `
-      Olá, meu nome é ${name} e desejo pedir um orçamento para minha locução
-      Eu estou precisando de uma locução do tipo: ${category}
-      O nicho da locução é: ${niche}
-      O número de palavras é: ${chars}
-      O meio de divulgação da narração é: ${channel}
-    `;
-      const templateParams = {
-        from_name: name,
-        message: message,
-        email: email,
-      };
-      if (
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-      ) {
-        emailjs.send(
-          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-          templateParams,
-          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-        );
-      }
-      setOpen(true);
-      setSuccess(true);
-      setMessage('Orçamento enviado com sucesso pelo email!');
+Eu estou precisando de uma locução do tipo: ${anotherCategory}
+
+O nicho da locução é: ${niche}
+
+O número de palavras é: ${chars}
+
+O meio de divulgação da narração é: ${channel} 
+
+${text === '' ? '' : `O texto da locução é: ${text}`}
+      `;
     } else {
-      setOpen(true);
-      setSuccess(false);
-      setMessage('Digite um email válido');
-      return;
+      message = `Olá, meu nome é ${name} e desejo pedir um orçamento para minha locução
+
+Eu estou precisando de uma locução do tipo: ${anotherCategory}
+
+O nicho da locução é: ${niche}
+
+O número de palavras é: ${chars}
+
+O meio de divulgação da narração é: ${channel} 
+
+${text === '' ? '' : `O texto da locução é: ${text}`}
+      `;
     }
+
+    const templateParams = {
+      from_name: name,
+      message: message,
+      email: email,
+    };
+    if (
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+    ) {
+      emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      );
+    }
+    setOpen(true);
+    setSuccess(true);
+    setMessage('Orçamento enviado com sucesso pelo email!');
+  };
+
+  const sendMessageByEmail = async () => {
+    try {
+      const { deliverability } = await validateEmail(email);
+      if (deliverability !== 'DELIVERABLE') {
+        setOpen(true);
+        setSuccess(true);
+        setMessage('Orçamento enviado com sucesso pelo email!');
+        emailTemplate(name, email);
+        return;
+      } else {
+        setOpen(true);
+        setSuccess(false);
+        setMessage('Digite um email válido');
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    emailTemplate(name, email);
   };
 
   const sendMessageByWhatsapp = async () => {
-    const message = `
-    Olá, meu nome é ${name} e desejo pedir um orçamento para minha locução
-      Eu estou precisando de uma locução do tipo: ${category}
-      O nicho da locução é: ${niche}
-      O número de palavras é: ${chars}
-      O meio de divulgação da narração é: ${channel} 
-    `;
+    let message = '';
+    if (category === 'Outra') {
+      message = `Olá, meu nome é *${name}* e desejo pedir um orçamento para minha locução
 
-    setLink(
-      `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
+*Eu estou precisando de uma locução do tipo*: ${anotherCategory}
+
+*O nicho da locução é*: ${niche}
+
+*O número de palavras é*: ${chars}
+
+*O meio de divulgação da narração é*: ${channel} 
+
+${text === '' ? '' : `*O texto da locução é*: ${text}`}
+      `;
+    } else {
+      message = `Olá, meu nome é *${name}* e desejo pedir um orçamento para minha locução
+
+*Eu estou precisando de uma locução do tipo*: ${category}
+      
+*O nicho da locução é*: ${niche}
+      
+*O número de palavras é*: ${chars}
+      
+*O meio de divulgação da narração é*: ${channel} 
+            `;
+    }
+
+    window.open(
+      `https://api.whatsapp.com/send?phone=71988078997&text=${encodeURIComponent(
         message
-      )}`
+      )}`,
+      '_blank'
     );
-
-    setOpenModal(true);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -136,24 +193,26 @@ export default function Section() {
     const errors = [
       !(name.length >= 5 && name.length <= 65),
       !checked[0] && !checked[1],
-      checked[0] && phone.length !== 11,
+      false,
       checked[1] &&
         !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email),
       category === '',
       niche === '',
       chars === 0,
       channel === '',
+      category === 'Outra' && anotherCategory === '',
     ];
 
     setValues({
       name: errors[0],
+      phone: false,
       preference: errors[1],
-      phone: errors[2],
       email: errors[3],
       category: errors[4],
       niche: errors[5],
       chars: errors[6],
       channel: errors[7],
+      anotherCategory: errors[8],
     });
 
     if (errors.some((e) => e === true)) {
@@ -258,7 +317,7 @@ export default function Section() {
             sx={{
               backgroundColor: theme.palette.background.paper,
               p: {
-                xs: '32px 32px !important',
+                xs: '0px 32px !important',
               },
               borderRadius: '10px',
               width: {
@@ -337,16 +396,6 @@ export default function Section() {
                   />
                 </FormGroup>
               </FormControl>
-              {checked[0] ? (
-                <PhoneInput
-                  phone={phone}
-                  setPhone={setPhone}
-                  values={values}
-                  setValues={setValues}
-                />
-              ) : (
-                <></>
-              )}
               {checked[1] ? (
                 <EmailInput
                   email={email}
@@ -367,31 +416,26 @@ export default function Section() {
                 values={values}
                 setValues={setValues}
               />
+              {category === 'Outra' ? (
+                <AnotherInput
+                  anotherCategory={anotherCategory}
+                  setAnotherCategory={setAnotherCategory}
+                  values={values}
+                  setValues={setValues}
+                />
+              ) : (
+                <></>
+              )}
             </Grid>
 
             {/* Nicho */}
             <Grid item xs={12} sx={style}>
-              <Typography variant="subtitle1" sx={{ mb: '5px' }}>
-                Me fale um pouco sobre o assunto da locução, sobre o que se
-                trata o texto?
-              </Typography>
-              <TextField
-                label="Qual o nicho da locução?"
-                variant="outlined"
-                multiline
-                error={values.niche}
-                value={niche}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setValues({ ...values, niche: false });
-                  setNiche(e.target.value);
-                }}
-                color={niche !== '' ? 'success' : 'error'}
-                helperText={
-                  niche !== ''
-                    ? ''
-                    : 'Descreva brevemente o nicho da sua locução'
-                }
-              ></TextField>
+              <NicheInput
+                niche={niche}
+                setNiche={setNiche}
+                values={values}
+                setValues={setValues}
+              />
             </Grid>
 
             {/* Subtitle */}
@@ -399,16 +443,20 @@ export default function Section() {
               <Typography variant="subtitle1" sx={{ mb: '5px' }}>
                 Qual o número total de palavras para essa narração? *
               </Typography>
+              <Typography
+                variant="caption"
+                sx={{ mb: '5px', color: theme.palette.text.secondary }}
+              >
+                Caso não saiba, digite o texto e calcularemos a número de
+                palavras
+              </Typography>
             </Grid>
 
             {/* Texto da locução + caracteres */}
             <Grid item xs={12} sm={9} sx={style}>
               <TextField
-                label="Digite um número ou envie o texto completo"
+                label="Digite o texto da locução caso não saiba o número de palavras"
                 multiline
-                helperText={
-                  'Caso não saiba, digite o texto e calcularemos os caracteres'
-                }
                 value={text}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setText(e.target.value);
@@ -424,6 +472,7 @@ export default function Section() {
               ></TextField>
             </Grid>
 
+            {/* Número de palavras */}
             <Grid item xs={12} sm={3} sx={style}>
               <TextField
                 type={'number'}
@@ -473,6 +522,7 @@ export default function Section() {
                   md: 'flex-end',
                 },
                 p: '0',
+                mb: '20px',
               }}
             >
               <Button variant="contained" type="submit">
@@ -485,11 +535,6 @@ export default function Section() {
             setOpen={setOpen}
             message={message}
             success={success}
-          />
-          <WhatsappModal
-            openModal={openModal}
-            setOpenModal={setOpenModal}
-            link={link}
           />
         </Grid>
       </Box>

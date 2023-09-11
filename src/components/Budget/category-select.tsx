@@ -14,6 +14,7 @@ interface CategorySelectProps {
     niche: boolean;
     chars: boolean;
     channel: boolean;
+    anotherCategory: boolean;
   };
   setValues: React.Dispatch<
     React.SetStateAction<{
@@ -25,6 +26,7 @@ interface CategorySelectProps {
       niche: boolean;
       chars: boolean;
       channel: boolean;
+      anotherCategory: boolean;
     }>
   >;
 }
@@ -35,10 +37,22 @@ export default function CategorySelect({
   values,
   setValues,
 }: CategorySelectProps) {
+  const categories = [
+    'Cartas de Vendas (VSL)',
+    'Vídeos para canal do Youtube',
+    'Vídeo Institucional',
+    'Áudios para Whatsapp',
+    'URAs humanizadas',
+    'E-learning',
+    'Vídeos internos',
+    'Comerciais e propagandas',
+    'Outra',
+  ];
+
   return (
     <>
-      <Typography variant="subtitle1" sx={{ mb: '5px' }}>
-        Qual tipo de locução você precisa?
+      <Typography variant="subtitle1" sx={{ mb: '10px' }}>
+        Qual categoria de locução você deseja?
       </Typography>
       <TextField
         id="demo-simple-select"
@@ -53,12 +67,13 @@ export default function CategorySelect({
         SelectProps={{ MenuProps: { disableScrollLock: true } }}
         color={category !== '' ? 'success' : 'error'}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Aatt</MenuItem>
-        <MenuItem value={30}>Bar</MenuItem>
-        <MenuItem value={40}>Ber</MenuItem>
-        <MenuItem value={50}>GHE</MenuItem>
-        <MenuItem value={60}>GDAg</MenuItem>
+        {categories.map((category) => {
+          return (
+            <MenuItem key={category} value={category}>
+              {category}
+            </MenuItem>
+          );
+        })}
       </TextField>
     </>
   );

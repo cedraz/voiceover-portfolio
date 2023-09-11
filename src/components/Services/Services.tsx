@@ -5,28 +5,28 @@ import MusicPlayerSlider from './MusicPlayerSlider';
 
 const SERVICES = [
   {
-    name: 'VSL B-TRADER',
-    audioSrc: '/audio/audio.mp3',
+    name: 'Criativo Positiva Agro',
+    audioSrc: '/audio/criativo-positiva-agro.mp3',
   },
   {
-    name: '1',
-    audioSrc: '/audio/audio2.mp3',
+    name: 'Institucional B-trader',
+    audioSrc: '/audio/institucional-b-trade.mp3',
   },
   {
-    name: '2',
-    audioSrc: '/audio/audio2.mp3',
+    name: 'Propaganda Maju Biju',
+    audioSrc: '/audio/propaganda-maju-bidu.mp3',
   },
   {
-    name: '3',
-    audioSrc: '/audio/audio2.mp3',
+    name: 'URA - Isa Sortini 2',
+    audioSrc: '/audio/ura-isa-sortini-2.mp3',
   },
   {
-    name: '4',
-    audioSrc: '/audio/audio2.mp3',
+    name: 'Video Review - RCB',
+    audioSrc: '/audio/video-review-rcb.mp3',
   },
   {
-    name: '5',
-    audioSrc: '/audio/audio2.mp3',
+    name: 'VSL - O poder da Cetose',
+    audioSrc: '/audio/vsl-o-poder-da-cetose.mp3',
   },
 ];
 

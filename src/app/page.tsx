@@ -45,8 +45,8 @@ export default function Home() {
 
   const SECTIONS = [
     {
-      id: 'Inicio',
-      href: '#Inicio',
+      id: 'Início',
+      href: '#Início',
       children: <Hero />,
       image: heroImage,
       order: true,
@@ -61,16 +61,16 @@ export default function Home() {
       color: 'background.default',
     },
     {
-      id: 'Serviços',
-      href: '#Serviços',
+      id: 'Portfólio',
+      href: '#Portfólio',
       children: <Services />,
       image: servicesImage,
       order: true,
       color: 'background.secondary',
     },
     {
-      id: 'Qualidade',
-      href: '#Qualidade',
+      id: 'Sobre',
+      href: '#Sobre',
       children: <Quality />,
       image: qualityImage,
       order: true,

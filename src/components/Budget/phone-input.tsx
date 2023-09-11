@@ -14,6 +14,7 @@ interface PhoneNumberInputProps {
     niche: boolean;
     chars: boolean;
     channel: boolean;
+    anotherCategory: boolean;
   };
   setValues: React.Dispatch<
     React.SetStateAction<{
@@ -25,6 +26,7 @@ interface PhoneNumberInputProps {
       niche: boolean;
       chars: boolean;
       channel: boolean;
+      anotherCategory: boolean;
     }>
   >;
 }

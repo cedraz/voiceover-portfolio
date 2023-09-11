@@ -14,6 +14,7 @@ interface CategorySelectProps {
     niche: boolean;
     chars: boolean;
     channel: boolean;
+    anotherCategory: boolean;
   };
   setValues: React.Dispatch<
     React.SetStateAction<{
@@ -25,6 +26,7 @@ interface CategorySelectProps {
       niche: boolean;
       chars: boolean;
       channel: boolean;
+      anotherCategory: boolean;
     }>
   >;
 }
@@ -44,6 +46,7 @@ export default function ChannelInput({
         label="Em que meio será divulgada?"
         error={values.channel}
         value={channel}
+        multiline
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setValues({ ...values, channel: false });
           setChannel(e.target.value);

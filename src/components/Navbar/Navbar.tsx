@@ -137,7 +137,7 @@ export default function Navbar({
             },
           }}
         >
-          <IconButton color="primary" href="#">
+          <IconButton color="primary" href="#Início">
             <MicIcon sx={{ fontSize: 36 }} />
           </IconButton>
           <Typography

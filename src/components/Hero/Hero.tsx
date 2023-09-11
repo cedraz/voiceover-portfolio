@@ -1,8 +1,11 @@
 'use client';
 import * as React from 'react';
 import { Button, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 export default function Hero() {
+  const theme = useTheme();
+
   return (
     <>
       <Typography
@@ -27,7 +30,10 @@ export default function Hero() {
           },
         }}
       >
-        Venha conhecer as melhores locuções do mundo
+        Olá, tudo bem? Eu sou a Locutora {''}
+        <span style={{ color: theme.palette.primary.main, fontSize: '3rem' }}>
+          Geovana Alves
+        </span>
       </Typography>
       <Typography
         variant="body1"
@@ -50,10 +56,12 @@ export default function Hero() {
           },
         }}
       >
-        Aqui você terá acesso as melhores locuções do Brasil, Aqui você terá
-        acesso as melhores. Aqui você terá acesso as melhores locuções
+        Aqui você terá acesso ao meu portfólio de locução, à descrição dos meus
+        serviços e aos meus contatos. Além disso, você pode solicitar o seu
+        orçamento. Vou me empenhar para que a locução fique perfeita para o que
+        você precisa!
       </Typography>
-      <Button variant="contained" sx={{}}>
+      <Button href={'#Orçamento'} variant="contained" sx={{}}>
         Faça seu orçamento
       </Button>
     </>
