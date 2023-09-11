@@ -74,7 +74,7 @@ export default function Home() {
       children: <Quality />,
       image: qualityImage,
       order: true,
-      color: 'background.default',
+      color: 'background.secondary',
     },
   ];
 

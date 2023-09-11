@@ -185,17 +185,22 @@ export default function Feedbacks() {
                       {Array.from(Array(stars), (_, index) => (
                         <StarIcon
                           key={index}
-                          sx={{ color: '#D8B866' }}
+                          sx={{ color: '#ffd465' }}
                         ></StarIcon>
                       ))}
                       {Array.from(Array(5 - stars), (_, index) => (
                         <StarBorderIcon
                           key={index}
-                          sx={{ color: '#D8B866' }}
+                          sx={{ color: '#ffd465' }}
                         ></StarBorderIcon>
                       ))}
                     </Grid>
-                    <Typography variant="caption" sx={{ paddingLeft: '5px' }}>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        paddingLeft: '5px',
+                      }}
+                    >
                       {date}
                     </Typography>
                   </CardActions>

@@ -135,6 +135,7 @@ export default function Navbar({
               lg: '0 120px',
               xl: '0 220px',
             },
+            backgroundColor: theme.navbar.first,
           }}
         >
           <IconButton color="primary" href="#Início">

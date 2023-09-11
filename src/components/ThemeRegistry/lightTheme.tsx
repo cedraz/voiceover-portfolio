@@ -59,9 +59,9 @@ export const lightTheme = createTheme({
       dark: '#2D3B80',
     },
     background: {
-      default: '#fff',
-      paper: '#e6e6e6',
-      secondary: '#F6F8FF',
+      default: '#e1e6ff',
+      paper: '#fff',
+      secondary: '#e1e6ff',
     },
     text: {
       primary: '#000000',
@@ -69,7 +69,7 @@ export const lightTheme = createTheme({
     },
   },
   navbar: {
-    first: '#F6F8FF',
+    first: '#e1e6ff',
   },
   footer: {
     bgcolor: '#000',
