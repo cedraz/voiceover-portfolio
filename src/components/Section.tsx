@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import Image from 'next/image';
-import { Container, Grid, Box } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import { StaticImageData } from 'next/image';

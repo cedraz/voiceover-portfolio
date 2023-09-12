@@ -45,14 +45,6 @@ export default function Home() {
 
   const SECTIONS = [
     {
-      id: 'Início',
-      href: '#Início',
-      children: <Hero />,
-      image: heroImage,
-      order: true,
-      color: 'background.secondary',
-    },
-    {
       id: 'Categorias',
       href: '#Categorias',
       children: <Categories />,
@@ -66,7 +58,7 @@ export default function Home() {
       children: <Services />,
       image: servicesImage,
       order: true,
-      color: 'background.secondary',
+      color: 'background.default',
     },
     {
       id: 'Sobre',
@@ -74,7 +66,7 @@ export default function Home() {
       children: <Quality />,
       image: qualityImage,
       order: true,
-      color: 'background.secondary',
+      color: 'background.default',
     },
   ];
 
@@ -82,7 +74,7 @@ export default function Home() {
     <>
       <ThemeRegistry theme={getMode(mode)}>
         <Navbar toggleFunc={toggleTheme} links={SECTIONS} />
-
+        <Hero />
         {SECTIONS.map(({ image, order, children, id, color }) => (
           <Section key={id} image={image} order={order} id={id} color={color}>
             {children}
