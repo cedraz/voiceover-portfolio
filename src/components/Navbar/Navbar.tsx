@@ -11,32 +11,13 @@ import {
   FormControlLabel,
   FormGroup,
   Drawer,
-  Box,
-  List,
-  ListItem,
 } from '@mui/material';
 import MicIcon from '@mui/icons-material/Mic';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-
-import { StaticImageData } from 'next/image';
 import { useTheme } from '@mui/material/styles';
 
-type Link = {
-  id: string;
-  href: string;
-  children: React.ReactNode;
-  image: StaticImageData;
-  order: boolean;
-};
-
-export default function Navbar({
-  toggleFunc,
-  links,
-}: {
-  toggleFunc: () => void;
-  links: Link[];
-}) {
+export default function Navbar({ toggleFunc }: { toggleFunc: () => void }) {
   const theme = useTheme();
   const [boxShadow, setBoxShadow] = React.useState('none');
   const [open, setOpen] = React.useState(false);
@@ -72,24 +53,19 @@ export default function Navbar({
     console.log('botao clicado');
   };
 
+  const links = ['Início', 'Categorias', 'Portfólio', 'Sobre', 'Feedbacks'];
+
   const stack = (
     <>
-      {links.map(({ id, href }) => (
+      {links.map((id) => (
         <Button
           key={id}
-          href={href}
+          href={`#${id}`}
           sx={{ color: 'text.primary', fontWeight: 400 }}
         >
           {id}
         </Button>
       ))}
-      <Button
-        key={'Feedback'}
-        href={'#Feedbacks'}
-        sx={{ color: 'text.primary', fontWeight: 400 }}
-      >
-        Feedbacks
-      </Button>
       <Button
         key="budget"
         href="#Orçamento"
@@ -123,7 +99,7 @@ export default function Navbar({
           zIndex: 2000,
           transition: '.3s ease-in-out',
           boxShadow: boxShadow,
-          backgroundColor: theme.navbar.first,
+          background: 'transparent',
         }}
       >
         <Toolbar
@@ -133,12 +109,16 @@ export default function Navbar({
               sm: '0 40px',
               md: '0 100px',
               lg: '0 120px',
-              xl: '0 220px',
+              xl: '0 180px',
             },
-            backgroundColor: theme.navbar.first,
+            backgroundColor: theme.palette.background.default,
           }}
         >
-          <IconButton color="primary" href="#Início">
+          <IconButton
+            color="primary"
+            href="#Início"
+            sx={{ padding: '0 !important' }}
+          >
             <MicIcon sx={{ fontSize: 36 }} />
           </IconButton>
           <Typography

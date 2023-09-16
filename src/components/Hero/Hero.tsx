@@ -18,13 +18,10 @@ export default function Hero() {
         height: {
           xs: 'fit-content',
         },
-        paddingBottom: {
-          xs: '130px',
-        },
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: theme.palette.background.secondary,
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Box
@@ -35,7 +32,8 @@ export default function Hero() {
             md: 'row',
           },
           marginTop: {
-            xs: '140px',
+            xs: '100px',
+            md: '140px',
           },
           width: {
             xs: '100%',
@@ -45,7 +43,7 @@ export default function Hero() {
             sm: '0 40px',
             md: '0 100px',
             lg: '0 120px',
-            xl: '0 220px',
+            xl: '0 180px',
           },
         }}
       >
@@ -129,7 +127,6 @@ export default function Hero() {
             display: 'flex',
             justifyContent: {
               xs: 'center',
-              md: 'flex-end',
             },
             alignItems: 'center',
             width: {

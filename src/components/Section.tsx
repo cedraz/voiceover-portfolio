@@ -55,7 +55,7 @@ export default function Section({
             sm: '0 40px',
             md: '0 100px',
             lg: '0 120px',
-            xl: '0 220px',
+            xl: '0 300px',
           },
         }}
       >

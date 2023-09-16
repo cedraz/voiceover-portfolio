@@ -2,12 +2,6 @@ import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface Theme {
-    navbar: {
-      first: string;
-    };
-    hero: {
-      bgcolor: string;
-    };
     footer: {
       bgcolor: string;
       color: {
@@ -18,12 +12,6 @@ declare module '@mui/material/styles' {
     };
   }
   interface ThemeOptions {
-    navbar?: {
-      first?: string;
-    };
-    hero?: {
-      bgcolor?: string;
-    };
     footer?: {
       bgcolor?: string;
       color?: {
@@ -44,6 +32,8 @@ declare module '@mui/material/styles' {
   interface TypeBackground {
     secondary: string;
     footer: string;
+    navbar: string;
+    hero: string;
   }
   interface TypeText {
     footer: string;
@@ -59,17 +49,15 @@ export const darkTheme = createTheme({
       dark: '#2D3B80',
     },
     background: {
-      default: '#272727',
+      default: '#171E40',
       paper: '#121212',
-      secondary: '#2e2e2e',
+      secondary: '#0C0F20',
+      navbar: '#23283E',
     },
     text: {
       primary: '#fff',
       secondary: '#B5B5B5',
     },
-  },
-  navbar: {
-    first: '#2e2e2e',
   },
   footer: {
     bgcolor: '#000',

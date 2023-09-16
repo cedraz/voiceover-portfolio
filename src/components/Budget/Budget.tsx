@@ -12,19 +12,16 @@ import {
   FormControlLabel,
   FormLabel,
   Checkbox,
-  MenuItem,
   Button,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-// import PhoneInput from './phone-input';
 import NameInput from './name-input';
 import EmailInput from './email-input';
 import CategorySelect from './category-select';
 import AnotherInput from './another-input';
 import ChannelInput from './channel-input';
 import FormSnackbar from './form-snackbar';
-import WhatsappModal from './whatsapp-modal';
 import NicheInput from './niche-input';
 
 export default function Section() {
@@ -37,7 +34,6 @@ export default function Section() {
   };
 
   const [name, setName] = React.useState('');
-  const [phone, setPhone] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [category, setCategory] = React.useState('');
   const [niche, setNiche] = React.useState('');
@@ -57,8 +53,6 @@ export default function Section() {
     anotherCategory: false,
   });
   const [open, setOpen] = React.useState(false);
-  const [openModal, setOpenModal] = React.useState(false);
-  const [link, setLink] = React.useState('');
   const [success, setSuccess] = React.useState(false);
   const [message, setMessage] = React.useState('');
 
@@ -237,6 +231,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
   const theme = useTheme();
   const style = {
     pl: '0 !important',
+    pt: '2px !important',
   };
 
   return (
@@ -248,10 +243,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
         height: {
           xs: 'fit-content',
         },
-        paddingBottom: {
-          xs: '50px',
-        },
-        backgroundColor: theme.palette.background.default,
+        background: 'linear-gradient(180deg, #171E40 0%, #000 100%)',
         width: {
           xs: '100%',
         },
@@ -261,6 +253,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
       }}
     >
       <Box
+        id={'OrçamentoBg'}
         component="form"
         noValidate
         onSubmit={handleSubmit}
@@ -299,9 +292,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
               xs: 'flex-end',
               md: 'flex-end',
             },
-            marginBottom: {
-              xs: '40px',
-            },
+            marginBottom: '100px',
             ml: {
               xs: '0',
             },
@@ -317,7 +308,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
             sx={{
               backgroundColor: theme.palette.background.paper,
               p: {
-                xs: '0px 32px !important',
+                xs: '10px 32px !important',
               },
               borderRadius: '10px',
               width: {

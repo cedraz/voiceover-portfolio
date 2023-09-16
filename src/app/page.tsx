@@ -11,16 +11,13 @@ import Navbar from '@/components/Navbar/Navbar';
 import Hero from '@/components/Hero/Hero';
 import Section from '@/components/Section';
 import Categories from '@/components/Categories/Categories';
-import Quality from '@/components/Quality/Quality';
-import Services from '@/components/Services/Services';
+import Portfolio from '@/components/Portfolio/Portfolio';
+import About from '@/components/About/About';
 import Feedbacks from '@/components/Feedbacks/Feedbacks';
 import Budget from '@/components/Budget/Budget';
 import Footer from '@/components/Footer/Footer';
 
-import heroImage from '../../public/images/hero.png';
-import categoriesImage from '../../public/images/categories.png';
-import qualityImage from '../../public/images/quality.png';
-import servicesImage from '../../public/images/services.png';
+import qualityImage from '../../public/images/about.png';
 
 import { register } from 'swiper/element/bundle';
 register();
@@ -30,7 +27,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/effect-coverflow';
 
 export default function Home() {
-  const [mode, setMode] = React.useState(true);
+  const [mode, setMode] = React.useState(false);
   const toggleTheme = () => {
     setMode(mode ? false : true);
   };
@@ -45,25 +42,9 @@ export default function Home() {
 
   const SECTIONS = [
     {
-      id: 'Categorias',
-      href: '#Categorias',
-      children: <Categories />,
-      image: categoriesImage,
-      order: false,
-      color: 'background.default',
-    },
-    {
-      id: 'Portfólio',
-      href: '#Portfólio',
-      children: <Services />,
-      image: servicesImage,
-      order: true,
-      color: 'background.default',
-    },
-    {
       id: 'Sobre',
       href: '#Sobre',
-      children: <Quality />,
+      children: <></>,
       image: qualityImage,
       order: true,
       color: 'background.default',
@@ -75,12 +56,9 @@ export default function Home() {
       <ThemeRegistry theme={getMode(mode)}>
         <Navbar toggleFunc={toggleTheme} links={SECTIONS} />
         <Hero />
-        {SECTIONS.map(({ image, order, children, id, color }) => (
-          <Section key={id} image={image} order={order} id={id} color={color}>
-            {children}
-          </Section>
-        ))}
-
+        <Categories />
+        <Portfolio />
+        <About />
         <Feedbacks />
         <Budget />
         <Footer />

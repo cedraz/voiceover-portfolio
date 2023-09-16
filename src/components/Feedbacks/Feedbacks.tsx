@@ -95,15 +95,15 @@ export default function Feedbacks() {
         container
         className="image-container"
         sx={{
-          height: 'fit-content',
-          backgroundColor: 'background.secondary',
+          height: '100%',
+          backgroundColor: theme.palette.background.default,
           width: '100%',
           margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          pt: '50px',
-          pb: '50px',
+          pt: '120px',
+          pb: '40px',
         }}
       >
         <Typography
@@ -112,9 +112,7 @@ export default function Feedbacks() {
             textAlign: {
               xs: 'center',
             },
-            padding: {
-              xs: '0 20px',
-            },
+            paddingBottom: '120px',
           }}
         >
           Confira algumas avaliações dos meus clientes
@@ -134,7 +132,7 @@ export default function Feedbacks() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '640px',
+                height: 'fit-content',
               }}
             >
               <Card
@@ -145,7 +143,7 @@ export default function Feedbacks() {
                   borderRadius: '10px',
                   width: '90%',
                   maxWidth: '450px',
-                  height: '260px',
+                  height: 'fit-content',
                 }}
               >
                 <CardContent
