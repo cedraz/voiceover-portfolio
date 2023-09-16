@@ -1,8 +1,9 @@
 'use client';
 import * as React from 'react';
 import Image from 'next/image';
-import { Grid, Box, Typography, Button } from '@mui/material';
+import { Grid, Box, Typography, Button, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import AddCardIcon from '@mui/icons-material/AddCard';
 
 import heroImage from '../../../public/images/hero.png';
 
@@ -117,7 +118,11 @@ export default function Hero() {
             seu orçamento. Vou me empenhar para que a locução fique perfeita
             para o que você precisa!
           </Typography>
-          <Button href={'#Orçamento'} variant="contained" sx={{}}>
+          <Button
+            href={'#Orçamento'}
+            variant="contained"
+            sx={{ width: '300px', height: '50px' }}
+          >
             Faça seu orçamento
           </Button>
         </Grid>

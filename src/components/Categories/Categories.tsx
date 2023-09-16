@@ -54,7 +54,7 @@ export default function Categories() {
             md: 'row-reverse',
           },
           marginTop: {
-            xs: '160px',
+            xs: '110px',
           },
           width: {
             xs: '100%',

@@ -15,6 +15,7 @@ import {
 import MicIcon from '@mui/icons-material/Mic';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import AddCardIcon from '@mui/icons-material/AddCard';
 import { useTheme } from '@mui/material/styles';
 
 export default function Navbar({ toggleFunc }: { toggleFunc: () => void }) {
@@ -73,6 +74,9 @@ export default function Navbar({ toggleFunc }: { toggleFunc: () => void }) {
         sx={{ color: '#fff' }}
       >
         Orçamento
+        <IconButton sx={{ p: '2px 0', pl: '10px' }}>
+          <AddCardIcon />
+        </IconButton>
       </Button>
       <FormGroup
         sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
