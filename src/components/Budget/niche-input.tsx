@@ -39,12 +39,8 @@ export default function NicheInput({
 }: CategorySelectProps) {
   return (
     <>
-      <Typography variant="subtitle1" sx={{ mb: '5px' }}>
-        Me fale um pouco sobre o assunto da locução, sobre o que se trata o
-        texto?
-      </Typography>
       <TextField
-        label="Qual o nicho da locução?"
+        label="Descreva brevemente o nicho da sua locução"
         variant="outlined"
         multiline
         error={values.niche}
@@ -54,9 +50,12 @@ export default function NicheInput({
           setNiche(e.target.value);
         }}
         color={niche !== '' ? 'success' : 'error'}
-        helperText={
-          niche !== '' ? '' : 'Descreva brevemente o nicho da sua locução'
-        }
+        sx={{
+          mt: {
+            xs: '10px',
+            md: '0',
+          },
+        }}
       ></TextField>
     </>
   );

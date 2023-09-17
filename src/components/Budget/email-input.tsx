@@ -55,9 +55,7 @@ export default function EmailInput({
           : 'error'
       }
       helperText={
-        /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)
-          ? ''
-          : 'Digite um email válido: "exemplo@email.com"'
+        values.email ? 'Digite um email válido: "exemplo@email.com"' : ''
       }
     />
   );

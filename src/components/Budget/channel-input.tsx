@@ -52,7 +52,7 @@ export default function ChannelInput({
           setChannel(e.target.value);
         }}
         color={channel !== '' ? 'success' : 'error'}
-        helperText={channel !== '' ? '' : 'Descreva o meio de divulgação'}
+        helperText={values.channel ? 'Descreva o meio de divulgação' : ''}
       ></TextField>
     </>
   );

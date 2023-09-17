@@ -52,11 +52,6 @@ export default function AnotherInput({
           setAnotherCategory(e.target.value);
         }}
         color={anotherCategory !== '' ? 'success' : 'error'}
-        helperText={
-          anotherCategory !== ''
-            ? ''
-            : 'Digite um texto sobre a categoria da sua locução'
-        }
       />
     </>
   );

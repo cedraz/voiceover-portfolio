@@ -177,7 +177,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
     event.preventDefault();
 
     const errors = [
-      !(name.length >= 5 && name.length <= 65),
+      !(name.length >= 3 && name.length <= 50),
       !checked[0] && !checked[1],
       false,
       checked[1] &&
@@ -208,15 +208,15 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
       return;
     }
 
-    if (checked[1]) {
-      await sendMessageByEmail();
-    }
-
     if (checked[0]) {
       setOpen(true);
       setSuccess(true);
       setMessage('Link com mensagem pronta gerado com sucesso!');
       await sendMessageByWhatsapp();
+    }
+
+    if (checked[1]) {
+      await sendMessageByEmail();
     }
   };
 
@@ -309,8 +309,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
                   xs: '0',
                 },
                 textAlign: {
-                  xs: 'center',
-                  sm: 'left',
+                  xs: 'left',
                 },
                 border: `1px solid ${theme.palette.text.primary}`,
               }}
@@ -339,13 +338,17 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
                     },
                   }}
                 >
-                  <FormLabel
-                    component="legend"
-                    color={checked[0] || checked[1] ? 'success' : 'error'}
-                    sx={{ fontSize: '16px' }}
-                  >
-                    Selecione pelo menos 1
-                  </FormLabel>
+                  {values.preference ? (
+                    <FormLabel
+                      component="legend"
+                      color={checked[0] || checked[1] ? 'success' : 'error'}
+                      sx={{ fontSize: '16px' }}
+                    >
+                      Selecione pelo menos 1
+                    </FormLabel>
+                  ) : (
+                    <></>
+                  )}
                   <FormGroup
                     sx={{
                       display: 'flex',
@@ -375,7 +378,16 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
                       label="Whatsapp"
                     />
                     <FormControlLabel
-                      control={<Checkbox onChange={handleCheckEmail} />}
+                      control={
+                        <Checkbox
+                          onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>
+                          ) => {
+                            setValues({ ...values, preference: false });
+                            handleCheckEmail(e);
+                          }}
+                        />
+                      }
                       label="Email"
                     />
                   </FormGroup>
@@ -392,28 +404,25 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
                 )}
               </Grid>
 
-              {/* Categoria de locução */}
               <Grid item xs={12} sx={style}>
+                <Typography variant="subtitle1" sx={{ mb: '5px' }}>
+                  Selecione a categoria desejada e me fale um pouco sobre o
+                  nicho da locução
+                </Typography>
+              </Grid>
+
+              {/* Categoria de locução */}
+              <Grid item xs={12} md={4} sx={style}>
                 <CategorySelect
                   category={category}
                   setCategory={setCategory}
                   values={values}
                   setValues={setValues}
                 />
-                {category === 'Outra' ? (
-                  <AnotherInput
-                    anotherCategory={anotherCategory}
-                    setAnotherCategory={setAnotherCategory}
-                    values={values}
-                    setValues={setValues}
-                  />
-                ) : (
-                  <></>
-                )}
               </Grid>
 
               {/* Nicho */}
-              <Grid item xs={12} sx={style}>
+              <Grid item xs={12} md={8} sx={style}>
                 <NicheInput
                   niche={niche}
                   setNiche={setNiche}
@@ -422,8 +431,21 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
                 />
               </Grid>
 
+              {category === 'Outra' ? (
+                <Grid item xs={12} sx={style}>
+                  <AnotherInput
+                    anotherCategory={anotherCategory}
+                    setAnotherCategory={setAnotherCategory}
+                    values={values}
+                    setValues={setValues}
+                  />
+                </Grid>
+              ) : (
+                <></>
+              )}
+
               {/* Subtitle */}
-              <Grid item xs={12} md={8} sx={style}>
+              <Grid item xs={12} sx={style} mt={'10px'}>
                 <Typography variant="subtitle1" sx={{ mb: '5px' }}>
                   Qual o número total de palavras para essa narração? *
                 </Typography>
@@ -437,7 +459,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
               </Grid>
 
               {/* Texto da locução + caracteres */}
-              <Grid item xs={12} sm={9} sx={style}>
+              <Grid item xs={12} sm={9.5} sx={style}>
                 <TextField
                   label="Digite o texto da locução caso não saiba o número de palavras"
                   multiline
@@ -460,7 +482,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
               <Grid
                 item
                 xs={12}
-                sm={3}
+                sm={2.5}
                 mt={{
                   xs: '20px',
                   sm: '0',
@@ -470,7 +492,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
                 <TextField
                   type={'number'}
                   label="Palavras"
-                  helperText={'Número de palavras'}
+                  helperText={'Nº de palavras'}
                   sx={{
                     width: {
                       xs: '100%',

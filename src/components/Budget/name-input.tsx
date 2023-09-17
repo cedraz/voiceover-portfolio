@@ -37,6 +37,12 @@ export default function NameInput({
   values,
   setValues,
 }: CategorySelectProps) {
+  const [chars, setChars] = React.useState(0);
+
+  const charsCounter = () => {
+    return <Typography variant="body1">{chars}/50</Typography>;
+  };
+
   return (
     <>
       <Typography variant="body1" sx={{ mb: '5px' }}>
@@ -47,16 +53,19 @@ export default function NameInput({
         variant="outlined"
         error={values.name}
         value={name}
+        multiline
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setValues({ ...values, name: false });
           setName(e.target.value);
+          setChars(e.target.value.length);
         }}
-        color={name.length >= 5 && name.length <= 65 ? 'success' : 'error'}
+        color={name.length >= 3 && name.length <= 50 ? 'success' : 'error'}
         helperText={
-          name.length >= 5 && name.length <= 65
-            ? ''
-            : 'Seu nome tem que ter entre 5 a 65 caracteres'
+          values.name ? 'Seu nome tem que ter entre 5 a 65 caracteres' : ''
         }
+        InputProps={{
+          endAdornment: charsCounter(),
+        }}
       />
     </>
   );

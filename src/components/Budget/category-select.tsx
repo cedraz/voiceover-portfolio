@@ -51,11 +51,14 @@ export default function CategorySelect({
 
   return (
     <>
-      <Typography variant="subtitle1" sx={{ mb: '10px' }}>
-        Qual categoria de locução você deseja?
-      </Typography>
       <TextField
         id="demo-simple-select"
+        sx={{
+          pr: {
+            xs: '0',
+            md: '8px !important',
+          },
+        }}
         label="Selecione"
         select
         error={values.category}
