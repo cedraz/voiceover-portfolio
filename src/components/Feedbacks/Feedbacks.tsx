@@ -12,8 +12,6 @@ import { useTheme } from '@mui/material/styles';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
-import '../../styles/parallax.css';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function Feedbacks() {

@@ -44,11 +44,17 @@ export default function Services() {
           <Grid
             key={name}
             item
-            xs={6}
+            xs={12}
+            sm={6}
+            md={6}
+            lg={6}
             sx={{
               minWidth: {
                 xs: '100%',
-                mm: 'fit-content',
+                mm: '0',
+              },
+              maxWidth: {
+                xs: '100%',
               },
               display: 'flex',
               justifyContent: 'center',
@@ -60,7 +66,8 @@ export default function Services() {
                   xs: '100%',
                 },
                 maxWidth: {
-                  xs: '350px',
+                  xs: '100%',
+                  mm: '450px',
                 },
               }}
             >

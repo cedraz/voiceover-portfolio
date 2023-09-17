@@ -16,6 +16,8 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
+import '../../styles/parallax.css';
+
 import NameInput from './name-input';
 import EmailInput from './email-input';
 import CategorySelect from './category-select';

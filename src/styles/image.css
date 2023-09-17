@@ -24,12 +24,12 @@
 
 @media (max-width: 1440px) {
   #Início img {
-    max-width: 500px;
+    max-width: 450px;
   }
 
-  /* #Portfólio img {
-    max-width: 450px;
-  } */
+  #Portfólio img {
+    max-width: 500px;
+  }
 }
 
 @media (max-width: 1024px) {
