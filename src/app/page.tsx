@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <>
       <ThemeRegistry theme={getMode(mode)}>
-        <Navbar toggleFunc={toggleTheme} links={SECTIONS} />
+        <Navbar toggleFunc={toggleTheme} />
         <Hero />
         <Categories />
         <Portfolio />
