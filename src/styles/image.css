@@ -3,3 +3,65 @@
   width: 100%;
   height: auto;
 }
+
+@media (max-width: 2560px) {
+  #Início img {
+    width: 500px;
+  }
+
+  #Categorias img {
+    max-width: 700px;
+  }
+
+  #Portfólio img {
+    max-width: 600px;
+  }
+
+  #Sobre img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1440px) {
+  #Início img {
+    max-width: 500px;
+  }
+
+  /* #Portfólio img {
+    max-width: 450px;
+  } */
+}
+
+@media (max-width: 1024px) {
+  #Início img {
+    max-width: 100%;
+  }
+
+  #Categorias img {
+    max-width: 700px;
+  }
+
+  #Portfólio img {
+    max-width: 500px;
+  }
+
+  #Sobre img {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  #Início img {
+    max-width: 100%;
+  }
+
+  #Portfólio img {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 500px) {
+}
+
+@media (max-width: 320px) {
+}

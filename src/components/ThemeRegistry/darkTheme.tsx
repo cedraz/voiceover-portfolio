@@ -2,22 +2,42 @@ import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface Theme {
-    hero: {
+    footer: {
       bgcolor: string;
-    };
-    navbar: {
-      first: string;
-      second: string;
+      color: {
+        primary: string;
+        secondary: string;
+      };
+      divider: string;
     };
   }
   interface ThemeOptions {
-    hero?: {
+    footer?: {
       bgcolor?: string;
+      color?: {
+        primary?: string;
+        secondary?: string;
+      };
+      divider?: string;
     };
-    navbar?: {
-      first?: string;
-      second?: string;
-    };
+  }
+  interface BreakpointOverrides {
+    xs: true;
+    mm: true;
+    sm: true;
+    md: true;
+    lg: true;
+    xl: true;
+  }
+  interface TypeBackground {
+    secondary: string;
+    footer: string;
+    navbar: string;
+    hero: string;
+  }
+  interface TypeText {
+    footer: string;
+    footerLink: string;
   }
 }
 
@@ -29,18 +49,33 @@ export const darkTheme = createTheme({
       dark: '#2D3B80',
     },
     background: {
-      default: '#242424',
+      default: '#171E40',
+      paper: '#121212',
+      secondary: '#0C0F20',
+      navbar: '#23283E',
     },
     text: {
       primary: '#fff',
       secondary: '#B5B5B5',
     },
   },
-  hero: {
-    bgcolor: '#272727',
+  footer: {
+    bgcolor: '#000',
+    color: {
+      primary: '#fff',
+      secondary: '#9F9F9F',
+    },
+    divider: '#fff',
   },
-  navbar: {
-    // first: '#2E3142',
+  breakpoints: {
+    values: {
+      xs: 0,
+      mm: 400,
+      sm: 768,
+      md: 1024,
+      lg: 1250,
+      xl: 1440,
+    },
   },
   typography: {
     fontFamily: 'Poppins',
@@ -76,6 +111,13 @@ export const darkTheme = createTheme({
         },
         label: {
           fontSize: 16,
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          width: '100%',
         },
       },
     },

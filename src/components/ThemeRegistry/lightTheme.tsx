@@ -2,30 +2,42 @@ import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface Theme {
-    navbar: {
-      first: string;
-    };
-    values: {
-      xs: number;
-      sm: number;
-      tt: number;
-      md: number;
-      lg: number;
-      xl: number;
+    footer: {
+      bgcolor: string;
+      color: {
+        primary: string;
+        secondary: string;
+      };
+      divider: string;
     };
   }
   interface ThemeOptions {
-    navbar?: {
-      first?: string;
+    footer?: {
+      bgcolor?: string;
+      color?: {
+        primary?: string;
+        secondary?: string;
+      };
+      divider?: string;
     };
-    values?: {
-      xs?: number;
-      sm?: number;
-      tt?: number;
-      md?: number;
-      lg?: number;
-      xl?: number;
-    };
+  }
+  interface BreakpointOverrides {
+    xs: true;
+    mm: true;
+    sm: true;
+    md: true;
+    lg: true;
+    xl: true;
+  }
+  interface TypeBackground {
+    secondary: string;
+    footer: string;
+    navbar: string;
+    hero: string;
+  }
+  interface TypeText {
+    footer: string;
+    footerLink: string;
   }
 }
 
@@ -37,26 +49,32 @@ export const lightTheme = createTheme({
       dark: '#2D3B80',
     },
     background: {
-      default: '#fff',
+      default: '#171E40',
+      paper: '#fff',
+      secondary: '#0C0F20',
+      navbar: '#171E40',
     },
     text: {
       primary: '#000000',
       secondary: '#343434',
     },
   },
-  hero: {
-    bgcolor: '#F6F8FF',
-  },
-  navbar: {
-    first: '#F6F8FF',
+  footer: {
+    bgcolor: '#000',
+    color: {
+      primary: '#fff',
+      secondary: '#9F9F9F',
+    },
+    divider: '#fff',
   },
   breakpoints: {
     values: {
       xs: 0,
-      sm: 600,
-      md: 1070,
-      lg: 1200,
-      xl: 1400,
+      mm: 400,
+      sm: 768,
+      md: 1024,
+      lg: 1250,
+      xl: 1440,
     },
   },
   typography: {
@@ -96,6 +114,13 @@ export const lightTheme = createTheme({
         },
         label: {
           fontSize: 16,
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          width: '100%',
         },
       },
     },

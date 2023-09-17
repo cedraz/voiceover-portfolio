@@ -3,8 +3,7 @@
 }
 
 #Orçamento {
-  background-color: 'theme.palette.primary.main';
-  background-image: url('../../public/images/paralaxBg.png');
+  background-image: url('../../public/images/BudgetImage.png');
   background-position: 50% 50%;
   background-size: cover;
   background-attachment: fixed;
