@@ -457,7 +457,15 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
               </Grid>
 
               {/* Número de palavras */}
-              <Grid item xs={12} sm={3} sx={style}>
+              <Grid
+                item
+                xs={12}
+                sm={3}
+                mt={{
+                  xs: '20px',
+                }}
+                sx={style}
+              >
                 <TextField
                   type={'number'}
                   label="Palavras"
