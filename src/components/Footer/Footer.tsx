@@ -32,8 +32,8 @@ export default function Footer() {
       href: '#Portfólio',
     },
     {
-      id: 'Qualidade',
-      href: '#Qualidade',
+      id: 'Sobre',
+      href: '#Sobre',
     },
     {
       id: 'Feedbacks',

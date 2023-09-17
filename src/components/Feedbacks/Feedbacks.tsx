@@ -98,11 +98,10 @@ export default function Feedbacks() {
           height: 'fit-content',
           backgroundColor: theme.palette.background.default,
           width: '100%',
-          marginTop: '160px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          pt: '50px',
+          pt: '160px',
           pb: '50px',
         }}
       >

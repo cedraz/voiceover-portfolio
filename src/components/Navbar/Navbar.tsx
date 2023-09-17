@@ -74,11 +74,11 @@ export default function Navbar({ toggleFunc }: { toggleFunc: () => void }) {
         sx={{ color: '#fff' }}
       >
         Orçamento
-        <IconButton sx={{ p: '2px 0', pl: '10px' }}>
+        <IconButton>
           <AddCardIcon />
         </IconButton>
       </Button>
-      <FormGroup
+      {/* <FormGroup
         sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
         <FormControlLabel
@@ -90,7 +90,7 @@ export default function Navbar({ toggleFunc }: { toggleFunc: () => void }) {
           control={<Switch onClick={toggleFunc} />}
           label={theme.palette.mode}
         />
-      </FormGroup>
+      </FormGroup> */}
     </>
   );
 
@@ -111,9 +111,9 @@ export default function Navbar({ toggleFunc }: { toggleFunc: () => void }) {
             padding: {
               xs: '0 20px',
               sm: '0 40px',
-              md: '0 100px',
-              lg: '0 120px',
-              xl: '0 180px',
+              md: '10px 100px',
+              lg: '10px 120px',
+              xl: '10px 180px',
             },
             backgroundColor: theme.palette.background.default,
           }}

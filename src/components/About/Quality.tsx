@@ -64,7 +64,7 @@ export default function Quality() {
       >
         Ofereço serviços de locução com revisão ortográfica detalhada e
         sugestões de fluidez gratuitas. Utilizando o FL Studio, faço edições
-        precisas com redução de ruídos, entregando áudio em formatos diversos.
+        precisas com redução de ruídos, entregando áudios em formatos diversos.
         Confie em mim para dar vida à sua voz e tornar seu projeto ainda mais
         profissional.
       </Typography>

@@ -65,7 +65,10 @@ export default function Services() {
               }}
             >
               <CardContent sx={{ paddingBottom: '16px !important' }}>
-                <MusicPlayerSlider audioSrc={audioSrc}></MusicPlayerSlider>
+                <MusicPlayerSlider
+                  audioName={name}
+                  audioSrc={audioSrc}
+                ></MusicPlayerSlider>
               </CardContent>
             </Card>
           </Grid>

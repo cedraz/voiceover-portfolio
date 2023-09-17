@@ -20,7 +20,13 @@ const TinyText = styled(Typography)({
   letterSpacing: 0.2,
 });
 
-export default function MusicPlayerSlider({ audioSrc }: { audioSrc: string }) {
+export default function MusicPlayerSlider({
+  audioSrc,
+  audioName,
+}: {
+  audioSrc: string;
+  audioName: string;
+}) {
   const theme = useTheme();
 
   const audioPlayer = React.useRef<HTMLAudioElement | null>(null);
@@ -91,7 +97,7 @@ export default function MusicPlayerSlider({ audioSrc }: { audioSrc: string }) {
             fontWeight={500}
             sx={{ pb: '10px' }}
           >
-            VSL B-TRADER
+            {audioName}
           </Typography>
         </Box>
       </Box>
