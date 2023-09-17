@@ -463,6 +463,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
                 sm={3}
                 mt={{
                   xs: '20px',
+                  sm: '0',
                 }}
                 sx={style}
               >
