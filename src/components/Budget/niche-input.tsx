@@ -1,6 +1,6 @@
-'use client';
-import * as React from 'react';
-import { TextField, Typography } from '@mui/material';
+'use client'
+import * as React from 'react'
+import { TextField } from '@mui/material'
 
 interface CategorySelectProps {
   niche: string;
@@ -32,31 +32,31 @@ interface CategorySelectProps {
 }
 
 export default function NicheInput({
-  niche,
-  setNiche,
-  values,
-  setValues,
+    niche,
+    setNiche,
+    values,
+    setValues,
 }: CategorySelectProps) {
-  return (
-    <>
-      <TextField
-        label="Descreva brevemente o nicho da sua locução"
-        variant="outlined"
-        multiline
-        error={values.niche}
-        value={niche}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setValues({ ...values, niche: false });
-          setNiche(e.target.value);
-        }}
-        color={niche !== '' ? 'success' : 'error'}
-        sx={{
-          mt: {
-            xs: '10px',
-            md: '0',
-          },
-        }}
-      ></TextField>
-    </>
-  );
+    return (
+        <>
+            <TextField
+                label="Descreva brevemente o nicho da sua locução"
+                variant="outlined"
+                multiline
+                error={values.niche}
+                value={niche}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setValues({ ...values, niche: false })
+                    setNiche(e.target.value)
+                }}
+                color={niche !== '' ? 'success' : 'error'}
+                sx={{
+                    mt: {
+                        xs: '10px',
+                        md: '0',
+                    },
+                }}
+            ></TextField>
+        </>
+    )
 }

@@ -1,6 +1,6 @@
-'use client';
-import * as React from 'react';
-import { TextField, Typography, MenuItem } from '@mui/material';
+'use client'
+import * as React from 'react'
+import { TextField, Typography } from '@mui/material'
 
 interface CategorySelectProps {
   channel: string;
@@ -32,28 +32,28 @@ interface CategorySelectProps {
 }
 
 export default function ChannelInput({
-  channel,
-  setChannel,
-  values,
-  setValues,
+    channel,
+    setChannel,
+    values,
+    setValues,
 }: CategorySelectProps) {
-  return (
-    <>
-      <Typography variant="subtitle1" sx={{ mb: '5px' }}>
+    return (
+        <>
+            <Typography variant="subtitle1" sx={{ mb: '5px' }}>
         Onde esta narração será divulgada?
-      </Typography>
-      <TextField
-        label="Em que meio será divulgada?"
-        error={values.channel}
-        value={channel}
-        multiline
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setValues({ ...values, channel: false });
-          setChannel(e.target.value);
-        }}
-        color={channel !== '' ? 'success' : 'error'}
-        helperText={values.channel ? 'Descreva o meio de divulgação' : ''}
-      ></TextField>
-    </>
-  );
+            </Typography>
+            <TextField
+                label="Em que meio será divulgada?"
+                error={values.channel}
+                value={channel}
+                multiline
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setValues({ ...values, channel: false })
+                    setChannel(e.target.value)
+                }}
+                color={channel !== '' ? 'success' : 'error'}
+                helperText={values.channel ? 'Descreva o meio de divulgação' : ''}
+            ></TextField>
+        </>
+    )
 }
