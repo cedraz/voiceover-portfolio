@@ -164,7 +164,7 @@ ${text === '' ? '' : `*O texto da locução é*: ${text}`}
         }
 
         window.open(
-            `https://api.whatsapp.com/send?phone=71988078997&text=${encodeURIComponent(
+            `https://api.whatsapp.com/send?phone=71981564988&text=${encodeURIComponent(
                 message
             )}`,
             '_blank'
