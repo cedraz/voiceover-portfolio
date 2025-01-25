@@ -42,84 +42,84 @@ declare module '@mui/material/styles' {
 }
 
 export const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-        primary: {
-            main: '#5A75FF',
-            dark: '#2D3B80',
-        },
-        background: {
-            default: '#171E40',
-            paper: '#121212',
-            secondary: '#0C0F20',
-            navbar: '#23283E',
-        },
-        text: {
-            primary: '#fff',
-            secondary: '#B5B5B5',
-        },
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#5A75FF',
+      dark: '#2D3B80',
     },
-    footer: {
-        bgcolor: '#000',
-        color: {
-            primary: '#fff',
-            secondary: '#9F9F9F',
-        },
-        divider: '#fff',
+    background: {
+      default: '#171E40',
+      paper: '#121212',
+      secondary: '#0C0F20',
+      navbar: '#23283E',
     },
-    breakpoints: {
-        values: {
-            xs: 0,
-            mm: 400,
-            sm: 768,
-            md: 1024,
-            lg: 1250,
-            xl: 1440,
-        },
+    text: {
+      primary: '#fff',
+      secondary: '#B5B5B5',
     },
-    typography: {
-        fontFamily: 'Poppins',
-        fontSize: 16,
+  },
+  footer: {
+    bgcolor: '#000',
+    color: {
+      primary: '#fff',
+      secondary: '#9F9F9F',
     },
-    components: {
-        MuiButton: {
-            variants: [
-                {
-                    props: { variant: 'text' },
-                    style: {
-                        ':hover': {
-                            backgroundColor: '#2E3142',
-                        },
-                        textTransform: 'none',
-                    },
-                },
-                {
-                    props: { variant: 'contained' },
-                    style: {
-                        textTransform: 'none',
-                        transition: '.15s ease-in-out',
-                        height: 'fit-content',
-                        width: 'fit-content',
-                    },
-                },
-            ],
-        },
-        MuiFormControlLabel: {
-            styleOverrides: {
-                root: {
-                    width: '94px',
-                },
-                label: {
-                    fontSize: 16,
-                },
+    divider: '#fff',
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      mm: 400,
+      sm: 768,
+      md: 1024,
+      lg: 1250,
+      xl: 1440,
+    },
+  },
+  typography: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+  },
+  components: {
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: 'text' },
+          style: {
+            ':hover': {
+              backgroundColor: '#2E3142',
             },
+            textTransform: 'none',
+          },
         },
-        MuiTextField: {
-            styleOverrides: {
-                root: {
-                    width: '100%',
-                },
-            },
+        {
+          props: { variant: 'contained' },
+          style: {
+            textTransform: 'none',
+            transition: '.15s ease-in-out',
+            height: 'fit-content',
+            width: 'fit-content',
+          },
         },
+      ],
     },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          width: '94px',
+        },
+        label: {
+          fontSize: 16,
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          width: '100%',
+        },
+      },
+    },
+  },
 })

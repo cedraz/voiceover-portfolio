@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Grid, Box, Typography, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import heroImage from '../../../public/images/hero.png';
+import heroImage from '../../assets/images/hero.png';
 
 export default function Hero() {
   const theme = useTheme();

@@ -32,52 +32,52 @@ interface CategorySelectProps {
 }
 
 export default function CategorySelect({
-    category,
-    setCategory,
-    values,
-    setValues,
+  category,
+  setCategory,
+  values,
+  setValues,
 }: CategorySelectProps) {
-    const categories = [
-        'Cartas de Vendas (VSL)',
-        'Vídeos para canal do Youtube',
-        'Vídeo Institucional',
-        'Áudios para Whatsapp',
-        'URAs humanizadas',
-        'E-learning',
-        'Vídeos internos',
-        'Comerciais e propagandas',
-        'Outra',
-    ]
+  const categories = [
+    'Cartas de Vendas (VSL)',
+    'Vídeos para canal do Youtube',
+    'Vídeo Institucional',
+    'Áudios para Whatsapp',
+    'URAs humanizadas',
+    'E-learning',
+    'Vídeos internos',
+    'Comerciais e propagandas',
+    'Outra',
+  ]
 
-    return (
-        <>
-            <TextField
-                id="demo-simple-select"
-                sx={{
-                    pr: {
-                        xs: '0',
-                        md: '8px !important',
-                    },
-                }}
-                label="Selecione"
-                select
-                error={values.category}
-                value={category}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setValues({ ...values, category: false })
-                    setCategory(e.target.value)
-                }}
-                SelectProps={{ MenuProps: { disableScrollLock: true } }}
-                color={category !== '' ? 'success' : 'error'}
-            >
-                {categories.map((category) => {
-                    return (
-                        <MenuItem key={category} value={category}>
-                            {category}
-                        </MenuItem>
-                    )
-                })}
-            </TextField>
-        </>
-    )
+  return (
+    <>
+      <TextField
+        id="demo-simple-select"
+        sx={{
+          pr: {
+            xs: '0',
+            md: '8px !important',
+          },
+        }}
+        label="Selecione"
+        select
+        error={values.category}
+        value={category}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setValues({ ...values, category: false })
+          setCategory(e.target.value)
+        }}
+        SelectProps={{ MenuProps: { disableScrollLock: true } }}
+        color={category !== '' ? 'success' : 'error'}
+      >
+        {categories.map((category) => {
+          return (
+            <MenuItem key={category} value={category}>
+              {category}
+            </MenuItem>
+          )
+        })}
+      </TextField>
+    </>
+  )
 }
